@@ -1,0 +1,76 @@
+a { 		text-decoration: none;}
+
+a:hover {	text-decoration: underline;}
+
+#wrapper {	width:600px;
+		height:371px; /* Golden ratio of width */
+		/*http://css.flepstudio.org/en/css-tutorials/centered-vertical-horizontal-align.html#css-center-horizontal-vertical-align-1*/
+		position:absolute; /*the element is removed from the natural flux of the page and positioned in a absolute way*/
+		left: 50%; /*the left border of the element is positioned at half of the available width of the parent element*/
+		top: 50%; /*the top border of the element is positioned at half of the available height of the parent element*/
+		margin-left: -300px; /*half of the element width is removed from the left margin to center it*/
+		margin-top: -215px; /*half of the element height is removed from the top margin to center it*/
+		box-shadow: 0 0 5px #aaaaaa;}
+
+#content {	text-align:center;
+		font-family:Palatino,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+		position:relative;
+		top:-325px;}
+
+#content h1 {	text-transform:uppercase;
+		text-shadow:0 0 1px #666677;
+		font-weight: normal;}
+
+#content p {	text-transform:uppercase;
+		text-shadow:0 0 1px #cccccc;
+		font-weight: normal;}
+
+#content a {	text-transform:uppercase;
+		text-shadow:0 0 1px #cccccc;
+		font-weight: normal;
+		color:black;
+		font-family:Palatino,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;}
+
+.cardBorder {	border-color:#000000;
+		border-width:3px;
+		position:absolute;}
+			
+#bigLeft {	height:325px;
+		width:142px;
+		margin-top:20px;
+		margin-left:20px;
+		position:absolute;
+		top:0;
+		left:0;
+		border-left-style:solid;
+		border-top-style:solid;
+		border-bottom-style:solid;}
+
+#bigMid {	height:361px;
+		width:20px;
+		margin:3px auto;
+		position:relative;
+		font-family:'Arial Unicode MS',FreeSerif,OpenSymbol,'DejaVu Sans',sans-serif;
+		text-shadow:0 0 1px #cccccc;
+		font-size:18pt}
+
+#bigMidTop {	position:absolute;
+		top:0;
+		width:100%;
+		text-align:center;}
+
+#bigMidBottom {	position:absolute;
+		bottom:0;
+		width:100%;
+		text-align:center;}
+
+#bigRight {	height:325px;
+		width:142px;
+		margin-top:20px;
+		margin-right:20px;
+		position:absolute;
+		top:0;
+		right:0;
+		border-right-style:solid;
+		border-top-style:solid;
+		border-bottom-style:solid;}
