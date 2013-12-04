@@ -1,0 +1,3 @@
+[submodule "mag2tor"]
+	path = mag2tor
+	url = https://github.com/pR0Ps/mag2tor.git

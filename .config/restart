@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This script is called after the website is updated
+
+# Restart the webserver
+sudo /etc/init.d/nginx restart
+
+# Restart Mag2tor
+cd /srv/http/cmetcalfe.ca/mag2tor
+source venv/bin/activate
+gunicorn app:app -b unix:///tmp/mag2tor.socket -w 1 -D
+deactivate
