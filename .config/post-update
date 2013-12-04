@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# This script is called after the website is updated
+# Constants and functions are defined at the top, the script is at the bottom
+
+ROOT=/srv/http/cmetcalfe.ca
+
+clone_submodules(){
+    # Clones all the submodules in the project
+    # Can't use `git submodule` commands  because this is working in the file tree, not a repo
+    # Couldn't figure out the proper way to do submodules with a bare repo
+    cd $ROOT
+
+    if [[ -f .gitmodules ]]; then
+
+        echo "Cloning git submodules"
+
+        git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
+        while read path_key path; do
+            url_key=$(echo $path_key | sed 's/\.path/.url/')
+            url=$(git config -f .gitmodules --get "$url_key")
+            if [[ ! -d $path ]]; then
+                # Module doesn't exist, clone it
+                echo "Cloning new submodule '"$path"'"
+                git clone $url $path
+            else
+                # Module exists, update it
+                echo "Updating existing submodule '"$path"'"
+                cd $path
+                git checkout -- .
+                git pull
+                cd ..
+            fi
+        done
+    fi
+}
+
+setup_venv_gunicorn(){
+    # Set up the virtualenv for the python app
+    echo "Checking virtualenv for '"$1"'"
+
+    cd $ROOT/$1
+    if [[ ! -d venv ]]; then
+        # Application virtualenv not configured, configure it
+        echo "Virtualenv not found, setting one up"
+        virtualenv venv
+        source venv/bin/activate
+        if [[ -f requirements.txt ]]; then
+            pip install -r requirements.txt
+        fi
+        pip install gunicorn
+    else
+        echo "Found virtualenv, activating it"
+        source venv/bin/activate
+    fi
+    echo "Starting gunicorn"
+    gunicorn app:app -b "unix:///tmp/"$1".socket" -w 1 -D
+    deactivate
+}
+
+echo "Running post-update script"
+
+# Clone all the git submodules
+clone_submodules
+
+# Restart Mag2tor
+setup_venv_gunicorn mag2tor
+
+#Restart the webserver
+echo "Restarting the webserver"
+sudo /etc/init.d/nginx restart

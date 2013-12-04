@@ -18,13 +18,13 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     include [path to website]/.config/*.conf;
     ```
 
-3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver
+3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver (and any other commands in `post-update` that need root)
 
     ```
     [user] ALL=(root) NOPASSWD: /etc/init.d/nginx restart
     ```
 
-4. Add the Git post-receive hook to update the data and restart the webserver
+4. Add the Git post-receive hook to update the data and call the `post-update` script
 
     ```
     #!/bin/sh
@@ -36,8 +36,8 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     GIT_WORK_TREE=$OUTPUT_DIR git checkout -f
     unset GIT_DIR
 
-    # Call the website's restart script
-    $OUTPUT_DIR/.config/restart
+    # Call the website's post-update script
+    $OUTPUT_DIR/.config/post-update
     ```
 
 5. Locally add the remote repository to the git remotes with
