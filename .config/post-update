@@ -53,8 +53,15 @@ setup_venv_gunicorn(){
         echo "Found virtualenv, activating it"
         source venv/bin/activate
     fi
-    echo "Starting gunicorn"
-    gunicorn app:app -b "unix:///tmp/"$1".socket" -w 1 -D
+
+    if [[ -f gunicorn.pid ]]; then
+        echo "Restarting gunicorn"
+        kill -HUP $(cat gunicorn.pid)
+    else
+        echo "Starting gunicorn"
+        gunicorn app:app -b "unix:///tmp/"$1".socket" -w 1 -D -p gunicorn.pid
+    fi
+
     deactivate
 }
 
