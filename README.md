@@ -30,13 +30,14 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     #!/bin/sh
 
     # Set up the location to update
-    export GIT_WORK_TREE=[path to website];
+    OUTPUT_DIR=[path to website]
 
     # Check out the new version of the website
-    git checkout -f
+    GIT_WORK_TREE=$OUTPUT_DIR git checkout -f
+    unset GIT_DIR
 
-    # Restart the webserver
-    sudo /etc/init.d/nginx restart
+    # Call the website's restart script
+    $OUTPUT_DIR/.config/restart
     ```
 
 5. Locally add the remote repository to the git remotes with
