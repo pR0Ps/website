@@ -35,7 +35,8 @@ clone_submodules(){
     fi
 }
 
-setup_venv_gunicorn(){
+setup_venv(){
+
     # Set up the virtualenv for the python app
     echo "Checking virtualenv for '"$1"'"
 
@@ -48,12 +49,24 @@ setup_venv_gunicorn(){
         if [[ -f requirements.txt ]]; then
             pip install -r requirements.txt
         fi
-        pip install gunicorn
+        # Signal that the venv was not found (created)
+        return 1
     else
         echo "Found virtualenv, activating it"
         source venv/bin/activate
+        # Signal that the venv was found
+        return 0
+    fi
+}
+
+run_gunicorn(){
+
+    if ! setup_venv $1; then
+        # Virtual env was created, not found - needs gunicorn
+        pip install gunicorn
     fi
 
+    # (Re)start gunicorn
     if [[ -f gunicorn.pid ]]; then
         echo "Restarting gunicorn"
         kill -HUP $(cat gunicorn.pid)
@@ -62,6 +75,19 @@ setup_venv_gunicorn(){
         gunicorn app:app -b "unix:///tmp/"$1".socket" -w 1 -D -p gunicorn.pid
     fi
 
+    # Leave the vitualenv
+    deactivate
+}
+
+generate_site(){
+
+    # Setup the virtualenv
+    setup_venv .config/pelican
+
+    echo "Generating the site"
+    pelican -s publishconf.py -o $ROOT/www content
+
+    # Leave the vitualenv
     deactivate
 }
 
@@ -71,8 +97,11 @@ echo "Running post-update script"
 clone_submodules
 
 # Restart Mag2tor
-setup_venv_gunicorn mag2tor
+run_gunicorn mag2tor
 
-#Restart the webserver
+# Generate the site
+generate_site
+
+# Restart the webserver
 echo "Restarting the webserver"
 sudo /etc/init.d/nginx restart
