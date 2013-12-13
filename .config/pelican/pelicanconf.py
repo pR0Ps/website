@@ -15,6 +15,9 @@ FEED_ALL_RSS = "feeds/rss.xml"
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
+PLUGIN_PATH = "plugins"
+PLUGINS = ["sitemap",]
+
 # global metadata to all the contents
 #DEFAULT_METADATA = (('carey', 'metcalfe', 'pr0ps', 'pr0pscm', 'code'),)
 
@@ -33,6 +36,21 @@ STATIC_PATHS = ['images', "extra"]
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'extra/robots.txt': {'path': 'robots.txt'},
+}
+
+# Sitemap plugin
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 0.5,
+        'indexes': 0.5,
+        'pages': 0.5
+    },
+    'changefreqs': {
+        'articles': 'monthly',
+        'indexes': 'daily',
+        'pages': 'monthly'
+    }
 }
 
 # Hacky name->icon logic (lowercase, \255 -> '-', '+' -> 'plus')
