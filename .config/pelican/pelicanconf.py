@@ -18,9 +18,6 @@ TRANSLATION_FEED_ATOM = None
 PLUGIN_PATH = "plugins"
 PLUGINS = ["sitemap",]
 
-# global metadata to all the contents
-#DEFAULT_METADATA = (('carey', 'metcalfe', 'pr0ps', 'pr0pscm', 'code'),)
-
 THEME="themes/pelican-svbhack"
 
 #Theme specific
@@ -31,6 +28,7 @@ USER_LOGO_URL="https://s.gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d?s=
 SCROLL_TO_CONTENT = True
 FORCE_PIXELS = False
 MANGLE_EMAILS = True
+GLOBAL_KEYWORDS = ("cmetcalfe", "carey", "metcalfe", "pr0ps", "pr0pscm", "blog")
 
 STATIC_PATHS = ['images', "extra"]
 EXTRA_PATH_METADATA = {
@@ -56,9 +54,9 @@ SITEMAP = {
 # Hacky name->icon logic (lowercase, \255 -> '-', '+' -> 'plus')
 SOCIAL = (
     ("GitHub", "https://github.com/pR0Ps"),
-    ("Google\255+", "https://plus.google.com/+CareyMetcalfe"),
+    ("Google+", "https://plus.google.com/+CareyMetcalfe"),
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
-    ("Stack\255overflow", "https://stackoverflow.com/users/369977/pr0ps"),
+    ("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
     ("Email", "mailto:carey@cmetcalfe.ca"),
     ("Bitcoin", "bitcoin:1EuToNinKcR8mF2sTcgM9LLLN7aVi4zDSs"),
