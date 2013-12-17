@@ -82,7 +82,7 @@ run_gunicorn(){
 generate_site(){
 
     # Setup the virtualenv
-    setup_venv .config/pelican
+    setup_venv pelican
 
     echo "Generating the site"
     pelican -s publishconf.py -o $ROOT/www content

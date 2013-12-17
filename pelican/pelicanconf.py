@@ -18,7 +18,7 @@ TRANSLATION_FEED_ATOM = None
 PLUGIN_PATH = "plugins"
 PLUGINS = ["sitemap",]
 
-THEME="themes/pelican-svbhack"
+THEME="theme/pelican-svbhack"
 
 #Theme specific
 GOOGLE_ANALYTICS="UA-28306875-1"

@@ -1,0 +1,4 @@
+*.pyc
+*/venv
+pelican/theme
+pelican/output

@@ -15,7 +15,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 2. Setup a site configuration file that includes all configuration files in the repositories `.config` directory. Ex:
 
     ```
-    include [path to website]/.config/*.conf;
+    include [path to website]/web_config/*.conf;
     ```
 
 3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver (and any other commands in `post-update` that need root)
@@ -37,7 +37,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     unset GIT_DIR
 
     # Call the website's post-update script
-    $OUTPUT_DIR/.config/post-update
+    $OUTPUT_DIR/post-update
     ```
 
 5. Locally add the remote repository to the git remotes with
