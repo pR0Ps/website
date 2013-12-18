@@ -13,5 +13,4 @@ from pelicanconf import *
 SITEURL = 'http://cmetcalfe.ca'
 RELATIVE_URLS = False
 
-THEME = 'theme'
 DELETE_OUTPUT_DIRECTORY = True

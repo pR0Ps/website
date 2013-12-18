@@ -3,8 +3,8 @@
 
 from __future__ import unicode_literals
 
-AUTHOR = u'Carey Metcalfe'
-SITENAME = u'Carey Metcalfe'
+AUTHOR = 'Carey Metcalfe'
+SITENAME = 'Carey Metcalfe'
 
 TIMEZONE = 'America/Toronto'
 
@@ -18,13 +18,13 @@ TRANSLATION_FEED_ATOM = None
 PLUGIN_PATH = "plugins"
 PLUGINS = ["sitemap",]
 
-THEME="theme/pelican-svbhack"
+THEME = "theme"
 
 #Theme specific
-GOOGLE_ANALYTICS="UA-28306875-1"
+GOOGLE_ANALYTICS = "UA-28306875-1"
 GOOGLE_PLUS_URL = "https://plus.google.com/+CareyMetcalfe"
-TAGLINE= "B.CMP.H. Undergraduate"
-USER_LOGO_URL="https://s.gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d?s=150" # Gravatar
+TAGLINE = "B.CMP.H. Undergraduate"
+USER_LOGO_URL = "https://s.gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d?s=150" # Gravatar
 SCROLL_TO_CONTENT = True
 FORCE_PIXELS = False
 MANGLE_EMAILS = True
@@ -72,7 +72,7 @@ DEFAULT_CATEGORY = "content"
 SUMMARY_MAX_LENGTH = None
 
 INDEX_SAVE_AS = "blog/index.html"
-ARCHIVES_URL="blog/archives.html"
+ARCHIVES_URL = "blog/archives.html"
 ARCHIVES_SAVE_AS = 'blog/archives.html'
 ARTICLE_URL = 'blog/{slug}.html'
 ARTICLE_SAVE_AS = 'blog/{slug}.html'
