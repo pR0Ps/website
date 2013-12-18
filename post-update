@@ -5,6 +5,9 @@
 
 ROOT=/srv/http/cmetcalfe.ca
 
+# Create the output directory
+mkdir -p $ROOT/srv
+
 clone_submodules(){
     # Clones all the submodules in the project
     # Can't use `git submodule` commands  because this is working in the file tree, not a repo
@@ -85,7 +88,7 @@ generate_site(){
     setup_venv pelican
 
     echo "Generating the site"
-    pelican -s publishconf.py -o $ROOT/www content
+    pelican -s publishconf.py -o $ROOT/srv/www content
 
     # Leave the vitualenv
     deactivate
@@ -97,7 +100,7 @@ echo "Running post-update script"
 clone_submodules
 
 # Restart Mag2tor
-run_gunicorn mag2tor
+run_gunicorn srv/mag2tor
 
 # Generate the site
 generate_site
