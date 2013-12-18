@@ -1,7 +1,7 @@
 Title: How to download an entire Google Site
 Date: 2012-08-16 12:13
 Author: Carey Metcalfe
-Tags: application, website
+Tags: website, shell script, backup
 
 When using Google Sites, there is currently no way to make a backup of your
 site, or download the site so you can host it on another server.  

@@ -1,7 +1,7 @@
 Title: Making Steam for Linux close to the system tray
 Date: 2013-12-11 06:00
 Author: Carey Metcalfe
-Tags: application
+Tags: steam, linux, games
 
 Steam for Linux is a little odd in how it handles a user clicking the close button.
 Instead of exiting the program or mimimizing the application to the system tray, it just minimizes it to the taskbar.

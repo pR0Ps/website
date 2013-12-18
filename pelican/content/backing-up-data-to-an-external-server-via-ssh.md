@@ -1,7 +1,7 @@
 Title: Backing up data to an external server via SSH
 Date: 2012-08-16 12:12
 Author: Carey Metcalfe
-Tags: application, backup, code, unix, website
+Tags: linux, shell script, backup
 
 I recently needed to back up the contents of a website, but found that a
 disk quota was preventing me from doing so. What I really needed to do

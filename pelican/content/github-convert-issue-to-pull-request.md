@@ -1,6 +1,7 @@
 Title: Github: Convert an issue to a pull request
 Date: 2013-11-26 01:46
 Author: Carey Metcalfe
+Tags: code, git, github, shell script
 
 Github currently doesn't provide a way to convert an issue to a pull request
 in their interface. However, the capability exists in their [Pull Request API][]. All that's

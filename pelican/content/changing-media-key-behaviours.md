@@ -1,7 +1,7 @@
 Title: How keyboard media keys work
 Date: 2012-02-11 22:05
 Author: Carey Metcalfe
-Tags: application, registry, windows
+Tags: windows
 
 A recent project of mine involved tearing apart an old keyboard (a [Dell
 Y-UK-DEL1][]) and using the media keys to make a simple media controller box.  

@@ -1,7 +1,7 @@
 Title: Setting up TortiseHg on Windows
 Date: 2012-05-26 20:47
 Author: Carey Metcalfe
-Tags: application, code, windows
+Tags: code, windows, mercurial
 
 TortiseHg can be a bit of a pain to set up if you don't want to
 have [peagent][] running in the background all the time for

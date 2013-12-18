@@ -1,7 +1,7 @@
 Title: Gotcha with basic HTTP authentication in Python
 Date: 2013-06-12 19:53
 Author: Carey Metcalfe
-Tags: code, Python, website
+Tags: code, python
 
 When doing basic HTTP authentication in Python, make sure your
 authentication realm is surrounded by double, _NOT_ single quotes.
