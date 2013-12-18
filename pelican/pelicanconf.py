@@ -30,10 +30,10 @@ FORCE_PIXELS = False
 MANGLE_EMAILS = True
 GLOBAL_KEYWORDS = ("cmetcalfe", "carey", "metcalfe", "pr0ps", "pr0pscm", "blog")
 
-STATIC_PATHS = ['images', "extra"]
+STATIC_PATHS = ['images', "files"]
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'favicon.ico'},
-    'extra/robots.txt': {'path': 'robots.txt'},
+    'files/favicon.ico': {'path': 'favicon.ico'},
+    'files/robots.txt': {'path': 'robots.txt'},
 }
 
 # Sitemap plugin
@@ -56,10 +56,11 @@ SOCIAL = (
     ("GitHub", "https://github.com/pR0Ps"),
     ("Google+", "https://plus.google.com/+CareyMetcalfe"),
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
-    ("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
+    #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
+    ("Résumé (PDF)", "/files/cv.pdf"),
     ("Email", "mailto:carey@cmetcalfe.ca"),
-    ("Bitcoin", "bitcoin:1EuToNinKcR8mF2sTcgM9LLLN7aVi4zDSs"),
+    ("Donate (BTC)", "bitcoin:1EuToNinKcR8mF2sTcgM9LLLN7aVi4zDSs"),
 )
 
 DEFAULT_PAGINATION = 3

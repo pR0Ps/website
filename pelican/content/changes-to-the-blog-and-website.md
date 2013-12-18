@@ -6,7 +6,7 @@ Tags: website
 I used to run this site on two different platforms.
 There was a static landing page hosted on my server, and a blog hosted on [Blogger][].
 
-While the landing page was reasonably nice-looking (screenshot [here][]), the blog looked terrible.
+While the landing page was reasonably nice-looking (screenshot [here][screenshot]), the blog looked terrible.
 Free Blogger templates are generally not the nicest-looking things to look at and the one I used was no exception.
 
 More importantly though, the Blogger composer made really hard to generate nice-looking articles.
@@ -42,7 +42,7 @@ The code for the [template] and the [site] is all freely availible on GitHub.
 If you have any comments or suggestions I'd love to hear them!
 
   [Blogger]: http://blogger.com
-  [here]: {filename}/images/old_website_screenshot.png
+  [screenshot]: {filename}/images/old_website_screenshot.png
   [Markdown syntax]: http://daringfireball.net/projects/markdown
   [Pelican]: http://blog.getpelican.com
   [Jinja2]: http://jinja.pocoo.org/docs
