@@ -32,8 +32,8 @@ clone_submodules(){
                 cd $path
                 git checkout -- .
                 git pull
-                cd ..
             fi
+            cd $ROOT
         done
     fi
 }
@@ -72,10 +72,10 @@ run_gunicorn(){
     # (Re)start gunicorn
     if [[ -f gunicorn.pid ]]; then
         echo "Restarting gunicorn"
-        kill -HUP $(cat gunicorn.pid)
+        kill -HUP "$(cat gunicorn.pid)"
     else
         echo "Starting gunicorn"
-        gunicorn app:app -b "unix:///tmp/"$1".socket" -w 1 -D -p gunicorn.pid
+        gunicorn app:app -b "unix:///tmp/"$(basename $1)".socket" -w 1 -D -p gunicorn.pid
     fi
 
     # Leave the vitualenv
