@@ -3,7 +3,7 @@
 # This script is called after the website is updated
 # Constants and functions are defined at the top, the script is at the bottom
 
-ROOT=/srv/http/cmetcalfe.ca
+ROOT=`pwd`
 
 # Create the output directory
 mkdir -p $ROOT/srv
@@ -20,8 +20,8 @@ clone_submodules(){
 
         git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
         while read path_key path; do
-            url_key=$(echo $path_key | sed 's/\.path/.url/')
-            url=$(git config -f .gitmodules --get "$url_key")
+            url_key=`echo $path_key | sed 's/\.path/.url/'`
+            url=`git config -f .gitmodules --get "$url_key"`
             if [[ ! -d $path ]]; then
                 # Module doesn't exist, clone it
                 echo "Cloning new submodule '"$path"'"
@@ -72,10 +72,10 @@ run_gunicorn(){
     # (Re)start gunicorn
     if [[ -f gunicorn.pid ]]; then
         echo "Restarting gunicorn"
-        kill -HUP "$(cat gunicorn.pid)"
+        kill -HUP "`cat gunicorn.pid`"
     else
         echo "Starting gunicorn"
-        gunicorn app:app -b "unix:///tmp/"$(basename $1)".socket" -w 1 -D -p gunicorn.pid
+        gunicorn app:app -b "unix:///tmp/"`basename $1`".socket" -w 1 -D -p gunicorn.pid
     fi
 
     # Leave the vitualenv

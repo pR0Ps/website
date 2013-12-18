@@ -12,7 +12,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 
     `git init --bare`
 
-2. Setup a site configuration file that includes all configuration files in the repositories `.config` directory. Ex:
+2. Setup a site configuration file that includes all configuration files in the repositories `web_config` directory. Ex:
 
     ```
     include [path to website]/web_config/*.conf;
@@ -37,7 +37,8 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     unset GIT_DIR
 
     # Call the website's post-update script
-    $OUTPUT_DIR/post-update
+    cd $OUTPUT_DIR
+    ./post-update
     ```
 
 5. Locally add the remote repository to the git remotes with
