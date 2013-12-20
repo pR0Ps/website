@@ -53,13 +53,13 @@ SITEMAP = {
 
 # Hacky name->icon logic (lowercase, \255 -> '-', '+' -> 'plus')
 SOCIAL = (
+    ("Email", "mailto:carey@cmetcalfe.ca"),
     ("GitHub", "https://github.com/pR0Ps"),
     ("Google+", "https://plus.google.com/+CareyMetcalfe"),
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
     #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
     ("Résumé (PDF)", "/files/cv.pdf"),
-    ("Email", "mailto:carey@cmetcalfe.ca"),
     ("Donate (BTC)", "bitcoin:1EuToNinKcR8mF2sTcgM9LLLN7aVi4zDSs"),
 )
 
