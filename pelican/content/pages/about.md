@@ -13,7 +13,7 @@ To see a list of projects that I've worked on, check out my [GitHub Page][].
 
 Occasionally, I feel the need to document my experiences. If you're interested in what I have to say, check out the [Blog][] section.
 
-I'm currently employable! My résumé is availible [here][resume].
+I'm currently employable! My résumé is available [here][resume].
 
 If you want to get in touch with me for any reason, feel free to use any of the links in the sidebar.
 
