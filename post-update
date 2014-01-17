@@ -30,8 +30,9 @@ clone_submodules(){
                 # Module exists, update it
                 echo "Updating existing submodule '"$path"'"
                 cd $path
-                git checkout -- .
-                git pull
+                # Will overwrite everything
+                git fetch --all
+                git reset --hard origin/master
             fi
             cd $ROOT
         done
