@@ -21,7 +21,8 @@ PLUGINS = ["sitemap",]
 THEME = "theme"
 
 #Theme specific
-GOOGLE_ANALYTICS = "UA-28306875-1"
+GOOGLE_ANALYTICS_ID = "UA-28306875-1"
+GOOGLE_ANALYTICS_PROP = "cmetcalfe.ca"
 GOOGLE_PLUS_URL = "https://plus.google.com/+CareyMetcalfe"
 TAGLINE = "B.CMP.H. Undergraduate"
 USER_LOGO_URL = "https://s.gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d?s=150" # Gravatar
