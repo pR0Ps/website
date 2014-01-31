@@ -52,7 +52,6 @@ SITEMAP = {
     }
 }
 
-# Hacky name->icon logic (lowercase, \255 -> '-', '+' -> 'plus')
 SOCIAL = (
     ("Email", "mailto:carey@cmetcalfe.ca"),
     ("GitHub", "https://github.com/pR0Ps"),

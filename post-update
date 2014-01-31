@@ -88,8 +88,20 @@ generate_site(){
     # Setup the virtualenv
     setup_venv pelican
 
-    echo "Generating the site"
-    pelican -s publishconf.py -o $ROOT/srv/www content
+    # Check for lessc LESS compiler
+    need_less=`grep -q "SERVER_LESS\s*=\s*True\|1" publishconf.py`$?
+
+    if [[ $need_less -eq 0 ]] && ! which lessc >/dev/null; then
+        echo "**********WARNING: SITE WILL NOT BE GENERATED**********"
+        echo "No LESS compiler installed, but Pelican is configured to use one"
+    else
+        if [[ $need_less -eq 0 ]]; then
+            echo "Compiling the LESS file"
+            lessc theme/static/css/style.less theme/static/css/style.css
+        fi
+        echo "Generating the site"
+        pelican -s publishconf.py -o $ROOT/srv/www content
+    fi
 
     # Leave the vitualenv
     deactivate
