@@ -4,9 +4,10 @@
 # Constants and functions are defined at the top, the script is at the bottom
 
 ROOT=`pwd`
+OUT_DIR=out
 
 # Create the output directory
-mkdir -p $ROOT/srv
+mkdir -p $ROOT/$OUT_DIR
 
 clone_submodules(){
     # Clones all the submodules in the project
@@ -100,7 +101,7 @@ generate_site(){
             lessc theme/static/css/style.less theme/static/css/style.css
         fi
         echo "Generating the site"
-        pelican -s publishconf.py -o $ROOT/srv/www content
+        pelican -s publishconf.py -o $ROOT/$OUT_DIR/www content
     fi
 
     # Leave the vitualenv
@@ -113,7 +114,7 @@ echo "Running post-update script"
 clone_submodules
 
 # Restart Mag2tor
-run_gunicorn srv/mag2tor
+run_gunicorn $OUT_DIR/mag2tor
 
 # Generate the site
 generate_site

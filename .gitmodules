@@ -1,5 +1,5 @@
 [submodule "mag2tor"]
-    path = srv/mag2tor
+    path = out/mag2tor
     url = https://github.com/pR0Ps/mag2tor.git
 [submodule "pelican-svbhack"]
     path = pelican/theme
