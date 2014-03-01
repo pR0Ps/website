@@ -108,6 +108,18 @@ generate_site(){
     deactivate
 }
 
+generate_configs(){
+    # Make the directory for the config files
+    mkdir -p $ROOT/$OUT_DIR/_conf
+
+    # Replace {{root}} and {{output}} in config files as they're copied
+    for f in $ROOT/web_config/*.conf; do
+        sed -e "s|{{root}}|$ROOT|g" \
+            -e "s|{{output}}|$ROOT/$OUT_DIR|g" \
+            "$f" > $ROOT/$OUT_DIR/_conf/`basename "$f"`
+    done
+}
+
 echo "Running post-update script"
 
 # Clone all the git submodules
@@ -118,6 +130,9 @@ run_gunicorn $OUT_DIR/mag2tor
 
 # Generate the site
 generate_site
+
+# Modify the config files
+generate_configs
 
 # Restart the webserver
 echo "Restarting the webserver"

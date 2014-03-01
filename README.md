@@ -12,10 +12,10 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 
     `git init --bare`
 
-2. Setup a site configuration file that includes all configuration files in the repositories `web_config` directory. Ex:
+2. Setup a site configuration file that includes all configuration files in the repositories `out/_conf` directory. Ex:
 
     ```
-    include [path to website]/web_config/*.conf;
+    include [path to website]/out/_conf/*.conf;
     ```
 
 3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver (and any other commands in `post-update` that need root)
