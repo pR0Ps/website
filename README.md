@@ -12,7 +12,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 
     `git init --bare`
 
-2. Setup a site configuration file that includes all configuration files in the repositories `out/_conf` directory. Ex:
+2. Setup an Nginx site configuration file that includes all configuration files in the repositories `out/_conf` directory. Ex:
 
     ```
     include [path to website]/out/_conf/*.conf;
