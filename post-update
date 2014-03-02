@@ -3,8 +3,8 @@
 # This script is called after the website is updated
 # Constants and functions are defined at the top, the script is at the bottom
 
-ROOT=`pwd`
-OUT_DIR=out
+ROOT="`pwd`"
+OUT_DIR="out"
 
 # Create the output directory
 mkdir -p $ROOT/$OUT_DIR
@@ -26,11 +26,11 @@ clone_submodules(){
             if [[ ! -d $path ]]; then
                 # Module doesn't exist, clone it
                 echo "Cloning new submodule '"$path"'"
-                git clone $url $path
+                git clone "$url" "$path"
             else
                 # Module exists, update it
                 echo "Updating existing submodule '"$path"'"
-                cd $path
+                cd "$path"
                 # Will overwrite everything
                 git fetch --all
                 git reset --hard origin/master
@@ -45,7 +45,7 @@ setup_venv(){
     # Set up the virtualenv for the python app
     echo "Checking virtualenv for '"$1"'"
 
-    cd $ROOT/$1
+    cd $ROOT/"$1"
     if [[ ! -d venv ]]; then
         # Application virtualenv not configured, configure it
         echo "Virtualenv not found, setting one up"
@@ -66,7 +66,7 @@ setup_venv(){
 
 run_gunicorn(){
 
-    if ! setup_venv $1; then
+    if ! setup_venv "$1"; then
         # Virtual env was created, not found - needs gunicorn
         pip install gunicorn
     fi
@@ -77,7 +77,7 @@ run_gunicorn(){
         kill -HUP "`cat gunicorn.pid`"
     else
         echo "Starting gunicorn"
-        gunicorn app:app -b "unix:///tmp/"`basename $1`".socket" -w 1 -D -p gunicorn.pid
+        gunicorn app:app -b "unix:///tmp/"`basename "$1"`".socket" -w 1 -D -p gunicorn.pid
     fi
 
     # Leave the vitualenv
