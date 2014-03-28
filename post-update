@@ -128,6 +128,9 @@ clone_submodules
 # Restart Mag2tor
 run_gunicorn $OUT_DIR/mag2tor
 
+# Restart GH-I2P
+run_gunicorn $OUT_DIR/gh-i2p
+
 # Generate the site
 generate_site
 
