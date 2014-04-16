@@ -3,6 +3,8 @@ Date: 2013-11-26 01:46
 Author: Carey Metcalfe
 Tags: code, git, github, shell script
 
+**UPDATE:** I've built a tool to make this process easier. Check it out at [http://i2p.cmetcalfe.ca](http://i2p.cmetcalfe.ca) .
+
 Github currently doesn't provide a way to convert an issue to a pull request
 in their interface. However, the capability exists in their [Pull Request API][]. All that's
 needed is to call it using a simple `curl` command.
