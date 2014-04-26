@@ -72,9 +72,8 @@ run_gunicorn(){
     fi
 
     # (Re)start gunicorn
-    if [[ -f gunicorn.pid ]]; then
-        echo "Restarting gunicorn"
-        kill -HUP "`cat gunicorn.pid`"
+    if [[ -f gunicorn.pid ]] && kill -HUP "`cat gunicorn.pid`"; then
+        echo "Restarted gunicorn"
     else
         echo "Starting gunicorn"
         gunicorn app:app -b "unix:///tmp/"`basename "$1"`".socket" -w 1 -D -p gunicorn.pid
