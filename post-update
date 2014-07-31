@@ -19,21 +19,26 @@ clone_submodules(){
 
         echo "Cloning git submodules"
 
+        # For all paths in the .gitignore
         git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
         while read path_key path; do
-            url_key=`echo $path_key | sed 's/\.path/.url/'`
-            url=`git config -f .gitmodules --get "$url_key"`
+            # Take off the path part of the key
+            project_key=${path_key%\.path}
+
+            # Get the URL and branch of the submodules (default branch=master)
+            url=`git config -f .gitmodules --get "$project_key.url"`
+            branch=`git config -f .gitmodules --get "$project_key.branch" || echo "master"`
+
             if [[ ! -d $path ]]; then
                 # Module doesn't exist, clone it
-                echo "Cloning new submodule '"$path"'"
-                git clone "$url" "$path"
+                echo "Cloning new submodule '$path' on branch '$branch'"
+                git clone "$url" "$path" && cd "$path" && git checkout "$branch"
             else
                 # Module exists, update it
-                echo "Updating existing submodule '"$path"'"
+                echo "Updating existing submodule '$path' on branch '$branch'"
                 cd "$path"
                 # Will overwrite everything
-                git fetch --all
-                git reset --hard origin/master
+                git fetch --all && git reset --hard origin/$branch
             fi
             cd $ROOT
         done
