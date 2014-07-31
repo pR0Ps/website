@@ -6,9 +6,6 @@
 ROOT="`pwd`"
 OUT_DIR="out"
 
-# Create the output directory
-mkdir -p $ROOT/$OUT_DIR
-
 clone_submodules(){
     # Clones all the submodules in the project
     # Can't use `git submodule` commands  because this is working in the file tree, not a repo
@@ -50,11 +47,24 @@ setup_venv(){
     # Set up the virtualenv for the python app
     echo "Checking virtualenv for '"$1"'"
 
+    if [[ ! -d $ROOT/"$1" ]]; then
+        echo "No folder to setup virtualenv in found"
+        # Signal an error occured
+        return 2
+    fi
     cd $ROOT/"$1"
+
     if [[ ! -d venv ]]; then
         # Application virtualenv not configured, configure it
         echo "Virtualenv not found, setting one up"
         virtualenv venv
+
+        if [[ ! -d venv ]]; then
+            echo "Setting up virtualenv failed"
+            # Signal an error occured
+            return 2
+        fi
+
         source venv/bin/activate
         if [[ -f requirements.txt ]]; then
             pip install -r requirements.txt
@@ -71,7 +81,14 @@ setup_venv(){
 
 run_gunicorn(){
 
-    if ! setup_venv "$1"; then
+    setup_venv "$1"
+    status=$?
+
+    if [[ $status -eq 2 ]]; then
+        # Failed to create the virtualenv, can't continue
+        echo "Couldn't find or create the virtualenv, not starting the application"
+        return
+    elif [[ $status -eq 1 ]]; then
         # Virtual env was created, not found - needs gunicorn
         pip install gunicorn
     fi
@@ -125,6 +142,18 @@ generate_configs(){
 }
 
 echo "Running post-update script"
+
+# Check for dependencies
+dependencies=( "git" "pip" "virtualenv" )
+for command in ${dependencies[@]}; do
+    if ! which $command &>/dev/null; then
+        echo "Missing dependency '$command', exiting"
+        exit 1
+    fi
+done
+
+# Create the output directory
+mkdir -p $ROOT/$OUT_DIR
 
 # Clone all the git submodules
 clone_submodules
