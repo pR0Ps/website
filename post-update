@@ -24,18 +24,28 @@ clone_submodules(){
 
             # Get the URL and branch of the submodules (default branch=master)
             url=`git config -f .gitmodules --get "$project_key.url"`
-            branch=`git config -f .gitmodules --get "$project_key.branch" || echo "master"`
+            branch=`git config -f .gitmodules --get "$project_key.branch"`
 
             if [[ ! -d $path ]]; then
                 # Module doesn't exist, clone it
-                echo "Cloning new submodule '$path' on branch '$branch'"
-                git clone "$url" "$path" && cd "$path" && git checkout "$branch"
+                if [[ -z $branch ]]; then
+                    echo "Cloning new submodule '$path'"
+                    git clone "$url" "$path"
+                else
+                    echo "Cloning new submodule '$path' on branch '$branch'"
+                    git clone -b "$branch" --single-branch "$url" "$path"
+                fi
             else
                 # Module exists, update it
-                echo "Updating existing submodule '$path' on branch '$branch'"
                 cd "$path"
                 # Will overwrite everything
-                git fetch --all && git reset --hard origin/$branch
+                if [[ -z $branch ]]; then
+                    echo "Updating existing submodule '$path'"
+                    git fetch --all && git reset --hard origin
+                else
+                    echo "Updating existing submodule '$path' on branch '$branch'"
+                    git fetch --all && git reset --hard origin/$branch
+                fi
             fi
             cd $ROOT
         done
