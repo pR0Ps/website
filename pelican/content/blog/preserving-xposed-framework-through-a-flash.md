@@ -12,6 +12,12 @@ The issue is that when flashing a new ROM, the modified `app_process` is
 reverted back to the original version, disabling the Xposed Framework
 until it's restored.
 
+**UPDATE:** The Xposed Framework installer now includes the option to flash
+a zip file to install the framework instead of patching `app_process` directly.
+The method detailed in this post will still work, but the new way to make sure
+the framework is installed after flashing a new ROM is to simply flash the
+Xposed installer zip right after flashing the ROM.
+
 The solution to this is a script that will automatically back up the existing
 `app_process` before a flash, then restore it after the flash completes.
 
