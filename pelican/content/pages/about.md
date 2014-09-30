@@ -1,4 +1,4 @@
-Title: About Me
+Title: About
 url: index.html
 save_as: index.html
 
