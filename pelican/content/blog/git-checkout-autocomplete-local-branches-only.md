@@ -1,4 +1,4 @@
-Title: Git Checkout - Autocomplete Local Branches Only
+Title: Git checkout - autocomplete local branches only
 Date: 2014-09-24 23:05
 Author: Carey Metcalfe
 Tags: git, shell script

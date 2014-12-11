@@ -1,4 +1,4 @@
-Title: Reinstalling an Android App Without Losing Data
+Title: Reinstalling an Android app without losing data
 Date: 2014-12-11 11:20
 Author: Carey Metcalfe
 Tags: android
