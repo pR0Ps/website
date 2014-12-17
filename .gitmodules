@@ -6,4 +6,4 @@
     url = https://github.com/pR0Ps/gh-i2p.git
 [submodule "pelican-svbhack"]
     path = pelican/theme
-    url = https://github.com/pR0Ps/pelican-svbhack.git
+    url = https://github.com/pR0Ps/pelican-subtle.git
