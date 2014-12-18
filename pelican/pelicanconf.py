@@ -15,8 +15,8 @@ FEED_ALL_RSS = "feeds/rss.xml"
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
-PLUGIN_PATH = "plugins"
-PLUGINS = ["sitemap",]
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["sitemap"]
 
 THEME = "theme"
 
