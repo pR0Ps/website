@@ -1,8 +1,12 @@
+---
 Title: Preserving the Xposed Framework through a ROM flash
 Date: 2014-03-22 22:04
 Modified: 2014-09-27 01:20
 Author: Carey Metcalfe
-Tags: android, shell script
+Tags:
+  - android
+  - shell script
+---
 
 The [Xposed Framework](http://repo.xposed.info/) is a neat Android program that
 enables [user-made modules](http://repo.xposed.info/module-overview) to change

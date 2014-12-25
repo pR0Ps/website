@@ -1,7 +1,11 @@
+---
 Title: Resolving Windows NetBIOS names in Linux
 Date: 2013-03-17 01:49
 Author: Carey Metcalfe
-Tags: linux, windows
+Tags:
+ - linux
+ - windows
+---
 
 When accessing computers on a LAN, it's often useful to access them by
 name instead of IP. This is especially true when dealing with dynamic IP

@@ -1,8 +1,14 @@
-Title: Github: Convert an issue to a pull request
+---
+Title: "Github: Convert an issue to a pull request"
 Date: 2013-11-26 01:46
 Modified: 2014-04-16 03:58
 Author: Carey Metcalfe
-Tags: code, git, github, shell script
+Tags:
+  - code
+  - git
+  - github
+  - shell script
+---
 
 **UPDATE:** I've built a tool to make this process easier. Check it out at [http://i2p.cmetcalfe.ca](http://i2p.cmetcalfe.ca) .
 

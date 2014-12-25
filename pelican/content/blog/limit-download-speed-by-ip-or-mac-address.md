@@ -1,7 +1,11 @@
+---
 Title: Limit download speed by IP or MAC address
 Date: 2014-03-4 20:02
 Author: Carey Metcalfe
-Tags: router, shell script
+Tags:
+  - router
+  - shell script
+---
 
 Preamble
 --------

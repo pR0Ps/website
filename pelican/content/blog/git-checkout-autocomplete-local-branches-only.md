@@ -1,7 +1,11 @@
+---
 Title: Git checkout - autocomplete local branches only
 Date: 2014-09-24 23:05
 Author: Carey Metcalfe
-Tags: git, shell script
+Tags:
+  - git
+  - shell script
+---
 
 Having Git autocomplete branch names when doing a checkout is super useful.
 Having the autocomplete hang for 30 seconds because it has to look up all 3000

@@ -1,7 +1,11 @@
-Title: Vim: Search and replace in multiple files
+---
+Title: "Vim: Search and replace in multiple files"
 Date: 2012-08-27 14:11
 Author: Carey Metcalfe
-Tags: code, vim
+Tags:
+  - code
+  - vim
+---
 
 As is the way with [Vim][], there are a ton of features, but stumbling
 on the combination of commands that does what you want can be a bit

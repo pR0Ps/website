@@ -1,7 +1,12 @@
+---
 Title: How to set up Queen's University Webmail on an iPhone
 Date: 2012-08-16 11:55
 Author: Carey Metcalfe
-Tags: email, iphone, queen's university
+Tags:
+  - email
+  - iphone
+  - queen's university
+---
 
 Before you start, make sure the iPhone is connected to the internet via 3G or WiFi.
 

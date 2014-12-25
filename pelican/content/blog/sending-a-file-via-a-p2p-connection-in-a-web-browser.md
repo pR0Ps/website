@@ -1,7 +1,9 @@
+---
 Title: Sending a file via a P2P connection in a web browser
 Date: 2012-05-26 20:40
 Author: Carey Metcalfe
 Tags: website
+---
 
 [Sharefest][] is a site that allows users to send files of arbitrary size
 via a P2P connection. To use it, go to the site, select a file to share,

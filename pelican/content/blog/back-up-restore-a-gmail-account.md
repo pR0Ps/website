@@ -1,8 +1,13 @@
+---
 Title: Backup/Restore a GMail account
 Date: 2012-02-11 22:08
 Modified: 2014-12-17 16:44
 Author: Carey Metcalfe
-Tags: application, backup, email
+Tags:
+  - application
+  - backup
+  - email
+---
 
 [Gmvault][] is an [open source][] project that allows users to download all of
 their emails, as well as the labels.

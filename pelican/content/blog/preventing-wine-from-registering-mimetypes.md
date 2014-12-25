@@ -1,7 +1,11 @@
+---
 Title: Preventing Wine from registering mimetypes
 Date: 2013-12-29 14:37
 Author: Carey Metcalfe
-Tags: linux, wine
+Tags:
+  - linux
+  - wine
+---
 
 When installing [Wine for Linux][], the install script insists on associating all text files with its built-in notepad.exe
 

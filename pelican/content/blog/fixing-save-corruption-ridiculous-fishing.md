@@ -1,7 +1,11 @@
+---
 Title: Fixing save file corruption in Ridiculous Fishing
 Date: 2014-12-11 12:44
 Author: Carey Metcalfe
-Tags: android, games
+Tags:
+  - android
+  - games
+---
 
 [Ridiculous Fishing][] is a game by [Vlambeer][] about fishing. That's if you
 can call chainsawing fish and blowing them out of the sky with a bazooka "fishing".

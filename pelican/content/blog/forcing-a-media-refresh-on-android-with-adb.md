@@ -1,7 +1,9 @@
+---
 Title: Forcing a media refresh on Android with adb
 Date: 2013-09-09 18:52
 Author: Carey Metcalfe
 Tags: android
+---
 
 Android will automatically perform a media refresh when an SD card is
 mounted.

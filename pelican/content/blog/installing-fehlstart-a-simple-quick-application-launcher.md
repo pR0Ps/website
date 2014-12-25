@@ -1,7 +1,11 @@
+---
 Title: Installing Fehlstart - A simple, quick application launcher
 Date: 2013-09-09 18:51
 Author: Carey Metcalfe
-Tags: application, code
+Tags:
+  - application
+  - code
+---
 
 [Fehlstart][] is an application launcher, much like [Launchy][],
 [Quicksilver][], or [GNOME Do][]. However, where other launchers focus

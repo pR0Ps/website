@@ -1,7 +1,9 @@
+---
 Title: Reinstalling an Android app without losing data
 Date: 2014-12-11 11:20
 Author: Carey Metcalfe
 Tags: android
+---
 
 When an application isn't opening (and clearing the cache doesn't help) it
 sometimes helps to reinstall it. However, uninstalling then reinstalling the

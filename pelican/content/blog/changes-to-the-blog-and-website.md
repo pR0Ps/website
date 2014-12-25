@@ -1,7 +1,9 @@
+---
 Title: Changes to the blog and website
 Date: 2013-12-11 06:30
 Author: Carey Metcalfe
 Tags: website
+---
 
 I used to run this site on two different platforms.
 There was a static landing page hosted on my server, and a blog hosted on [Blogger][].

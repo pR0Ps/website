@@ -1,7 +1,11 @@
+---
 Title: Queen's University Resnet without IDA (Windows)
 Date: 2013-05-07 13:21
 Author: Carey Metcalfe
-Tags: queen's university, windows
+Tags:
+  - queen's university
+  - windows
+---
 
 Storytime
 ---------
