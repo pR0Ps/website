@@ -1,5 +1,5 @@
 *.pyc
 */venv
-pelican/theme
 pelican/output
-out
+out/_conf
+out/www
