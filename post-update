@@ -30,10 +30,10 @@ clone_submodules(){
                 # Module doesn't exist, clone it
                 if [[ -z $branch ]]; then
                     echo "Cloning new submodule '$path'"
-                    git clone "$url" "$path"
+                    git clone --recursive "$url" "$path"
                 else
                     echo "Cloning new submodule '$path' on branch '$branch'"
-                    git clone -b "$branch" --single-branch "$url" "$path"
+                    git clone -b "$branch" --single-branch --recursive "$url" "$path"
                 fi
             else
                 # Module exists, update it
@@ -41,10 +41,10 @@ clone_submodules(){
                 # Will overwrite everything
                 if [[ -z $branch ]]; then
                     echo "Updating existing submodule '$path'"
-                    git fetch --all && git reset --hard origin
+                    git fetch --all && git reset --hard origin && git submodule update --init
                 else
                     echo "Updating existing submodule '$path' on branch '$branch'"
-                    git fetch --all && git reset --hard origin/$branch
+                    git fetch --all && git reset --hard origin/$branch && git submodule update --init
                 fi
             fi
             cd $ROOT
