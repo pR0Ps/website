@@ -7,3 +7,6 @@
 [submodule "pelican-svbhack"]
     path = pelican/theme
     url = https://github.com/pR0Ps/pelican-subtle.git
+[submodule "pelican/plugins/md_metayaml"]
+	path = pelican/plugins/md_metayaml
+	url = https://github.com/pR0Ps/pelican-md-metayaml.git

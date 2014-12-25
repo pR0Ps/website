@@ -16,7 +16,7 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["sitemap"]
+PLUGINS = ["sitemap", "md_metayaml"]
 
 THEME = "theme"
 
