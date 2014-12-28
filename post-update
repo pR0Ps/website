@@ -6,52 +6,6 @@
 ROOT="`pwd`"
 OUT_DIR="out"
 
-clone_submodules(){
-    # Clones all the submodules in the project
-    # Can't use `git submodule` commands  because this is working in the file tree, not a repo
-    # Couldn't figure out the proper way to do submodules with a bare repo
-    cd $ROOT
-
-    if [[ -f .gitmodules ]]; then
-
-        echo "Cloning git submodules"
-
-        # For all paths in the .gitignore
-        git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
-        while read path_key path; do
-            # Take off the path part of the key
-            project_key=${path_key%\.path}
-
-            # Get the URL and branch of the submodules (default branch=master)
-            url=`git config -f .gitmodules --get "$project_key.url"`
-            branch=`git config -f .gitmodules --get "$project_key.branch"`
-
-            if [[ ! -d $path ]]; then
-                # Module doesn't exist, clone it
-                if [[ -z $branch ]]; then
-                    echo "Cloning new submodule '$path'"
-                    git clone --recursive "$url" "$path"
-                else
-                    echo "Cloning new submodule '$path' on branch '$branch'"
-                    git clone -b "$branch" --single-branch --recursive "$url" "$path"
-                fi
-            else
-                # Module exists, update it
-                cd "$path"
-                # Will overwrite everything
-                if [[ -z $branch ]]; then
-                    echo "Updating existing submodule '$path'"
-                    git fetch --all && git reset --hard origin && git submodule update --init
-                else
-                    echo "Updating existing submodule '$path' on branch '$branch'"
-                    git fetch --all && git reset --hard origin/$branch && git submodule update --init
-                fi
-            fi
-            cd $ROOT
-        done
-    fi
-}
-
 setup_venv(){
 
     # Set up the virtualenv for the python app
@@ -153,8 +107,8 @@ generate_configs(){
 
 echo "Running post-update script"
 
-# Check for dependencies
-dependencies=( "git" "pip" "virtualenv" )
+echo "Checking dependencies"
+dependencies=( "pip" "virtualenv" )
 for command in ${dependencies[@]}; do
     if ! which $command &>/dev/null; then
         echo "Missing dependency '$command', exiting"
@@ -162,24 +116,22 @@ for command in ${dependencies[@]}; do
     fi
 done
 
-# Create the output directory
-mkdir -p $ROOT/$OUT_DIR
+# Update the submodules
+echo "Updating submodules"
+git submodule update --init --recursive --force
 
-# Clone all the git submodules
-clone_submodules
-
-# Restart Mag2tor
+# Run/restart mag2tor
 run_gunicorn $OUT_DIR/mag2tor
 
-# Restart GH-I2P
+# Run/restart gh-i2p
 run_gunicorn $OUT_DIR/gh-i2p
 
 # Generate the site
 generate_site
 
-# Modify the config files
+# Generate the Nginx config files
 generate_configs
 
-# Restart the webserver
+# Restart the webserver to apply changes
 echo "Restarting the webserver"
 sudo /etc/init.d/nginx restart
