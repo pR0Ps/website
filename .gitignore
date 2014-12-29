@@ -1,5 +1,6 @@
 *.pyc
 */venv
 pelican/output
+pelican/cache
 out/_conf
 out/www
