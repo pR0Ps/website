@@ -1,7 +1,7 @@
 Personal Website
 ================
 
-This is the content of my personal website, found at http://cmetcalfe.ca
+This is the contents of my personal website, found at http://cmetcalfe.ca
 
 
 Updating
@@ -29,7 +29,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     [user] ALL=(root) NOPASSWD: /etc/init.d/nginx restart
     ```
 
-4. Add the Git post-receive hook (in `.git/hooks/post-receive` to update the data and call the `post-update` script
+4. Add the Git post-receive hook (in `.git/hooks/post-receive`) to update the data and call the `post-update` script
 
     ```
     #!/bin/sh
