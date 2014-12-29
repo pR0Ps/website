@@ -30,7 +30,7 @@ source.
 6. Press the key combination `<Super>` + `<Space>` to bring up the
    launcher
 7. Type to search through the installed applications, then press
-   <Enter>` to launch.
+   `<Enter>` to launch.
 
   [Fehlstart]: https://gitorious.org/fehlstart
   [Launchy]: http://www.launchy.net/
