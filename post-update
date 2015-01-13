@@ -22,7 +22,7 @@ setup_venv(){
         # Application virtualenv not configured, configure it
         echo "Virtualenv not found, setting one up"
 
-        if ! virtualenv venv; then
+        if ! virtualenv venv -p "$2"; then
             echo "Setting up virtualenv failed"
             # Signal an error occured
             return 2
@@ -47,7 +47,14 @@ setup_venv(){
 
 run_gunicorn(){
 
-    setup_venv "$1"
+    # Choose python version (default to system default)
+    if [ "$#" -gt 1 ]; then
+        pypath="$2"
+    else
+        pypath=`which python`
+    fi
+
+    setup_venv "$1" "$pypath"
     status=$?
 
     if [[ $status -eq 2 ]]; then
@@ -74,7 +81,7 @@ run_gunicorn(){
 generate_site(){
 
     # Setup the virtualenv
-    setup_venv pelican
+    setup_venv pelican `which python3`
 
     # Check for lessc LESS compiler
     need_less=`grep -q "SERVER_LESS\s*=\s*True\|1" publishconf.py`$?
@@ -123,10 +130,10 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart mag2tor
-run_gunicorn $OUT_DIR/mag2tor
+run_gunicorn $OUT_DIR/mag2tor `which python3`
 
 # Run/restart gh-i2p
-run_gunicorn $OUT_DIR/gh-i2p
+run_gunicorn $OUT_DIR/gh-i2p `which python3`
 
 # Generate the site
 generate_site
