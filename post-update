@@ -21,26 +21,28 @@ setup_venv(){
     if [[ ! -d venv ]]; then
         # Application virtualenv not configured, configure it
         echo "Virtualenv not found, setting one up"
-        virtualenv venv
 
-        if [[ ! -d venv ]]; then
+        if ! virtualenv venv; then
             echo "Setting up virtualenv failed"
             # Signal an error occured
             return 2
         fi
 
-        source venv/bin/activate
-        if [[ -f requirements.txt ]]; then
-            pip install -r requirements.txt
-        fi
-        # Signal that the venv was not found (created)
-        return 1
+        # Signal that the venv was created
+        ret=1
     else
         echo "Found virtualenv, activating it"
-        source venv/bin/activate
+
         # Signal that the venv was found
-        return 0
+        ret=0
     fi
+
+    source venv/bin/activate
+    if [[ -f requirements.txt ]]; then
+        pip install -r requirements.txt
+    fi
+
+    return $ret
 }
 
 run_gunicorn(){
