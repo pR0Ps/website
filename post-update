@@ -103,8 +103,9 @@ generate_site(){
 }
 
 generate_configs(){
-    # Make the directory for the config files
+    # Make the directory for the config files (and delete old ones)
     mkdir -p $ROOT/$OUT_DIR/_conf
+    rm $ROOT/$OUT_DIR/_conf/*
 
     # Replace {{root}} and {{output}} in config files as they're copied
     for f in $ROOT/web_config/*.conf; do
