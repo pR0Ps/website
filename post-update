@@ -117,7 +117,7 @@ generate_configs(){
 echo "Running post-update script"
 
 echo "Checking dependencies"
-dependencies=( "pip" "virtualenv" )
+dependencies=( "python3" "pip" "virtualenv" )
 for command in ${dependencies[@]}; do
     if ! which $command &>/dev/null; then
         echo "Missing dependency '$command', exiting"
