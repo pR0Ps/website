@@ -1,6 +1,8 @@
-Title: About
+---
+title: About
 url: index.html
 save_as: index.html
+---
 
 Hi, I'm Carey.
 

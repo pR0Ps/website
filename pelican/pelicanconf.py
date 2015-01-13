@@ -9,6 +9,7 @@ SITENAME = 'Carey Metcalfe'
 TIMEZONE = 'America/Toronto'
 
 DEFAULT_LANG = u'en'
+DEFAULT_DATE_FORMAT = "%b %d, %Y"
 
 FEED_ALL_ATOM = None
 FEED_ALL_RSS = "feeds/rss.xml"
