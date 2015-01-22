@@ -1,6 +1,7 @@
 ---
 Title: Reinstalling an Android app without losing data
 Date: 2014-12-11 11:20
+Modified: 2015-01-22 03:07
 Author: Carey Metcalfe
 Tags: android
 ---
@@ -19,7 +20,7 @@ adb -d shell "pm uninstall -k com.package.name"
 ```
 
 Then just reinstall the app (either from an apk file or the [Play Store][]) and
-the app will be back with all of it's data intact.
+the app will be back with all of its data intact.
 
   [ADB]: http://developer.android.com/tools/help/adb.html
   [Play Store]: https://play.google.com/store

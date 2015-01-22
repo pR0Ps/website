@@ -1,6 +1,7 @@
 ---
 Title: Fixing save file corruption in Ridiculous Fishing
 Date: 2014-12-11 12:44
+Modified: 2015-01-21 23:01
 Author: Carey Metcalfe
 Tags:
   - android
@@ -42,8 +43,8 @@ It should've been just a text document, but was well over 200MB.
 
 After trying out of habit to open the file in [Vim][] and having it hang (oops),
 I paged through the document with [less][]. About halfway through the file,
-there was a line containing "&amp;lt;message&amp;gt;@eggbirdTBA Take it to the
-Smartypants Bar" (no, that's not a formatting error, in the plist there's XML
+there was a line containing `&amp;lt;message&amp;gt;@eggbirdTBA Take it to the
+Smartypants Bar` (no, that's not a formatting error, in the plist there's XML
 data stored in a `<string>` element, requiring the `<` and `>` characters to be
 escaped) followed by about 200MB of garbage.
 
