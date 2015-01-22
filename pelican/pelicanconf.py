@@ -19,6 +19,7 @@ TRANSLATION_FEED_ATOM = None
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["sitemap", "md_metayaml"]
 MD_EXTENSIONS=['codehilite(css_class=highlight, guess_lang=False, linenums=True)', 'extra', 'admonition']
+LOAD_CONTENT_CACHE = False
 
 THEME = "theme"
 

@@ -39,7 +39,8 @@ setup_venv(){
 
     source venv/bin/activate
     if [[ -f requirements.txt ]]; then
-        pip install -r requirements.txt
+        # Get the newest versions allowed by the requirements file
+        pip install --upgrade -r requirements.txt
     fi
 
     return $ret
@@ -61,10 +62,10 @@ run_gunicorn(){
         # Failed to create the virtualenv, can't continue
         echo "Couldn't find or create the virtualenv, not starting the application"
         return
-    elif [[ $status -eq 1 ]]; then
-        # Virtual env was created, not found - needs gunicorn
-        pip install gunicorn
     fi
+
+    # Always update to the latest version
+    pip install --upgrade gunicorn
 
     # (Re)start gunicorn
     if [[ -f gunicorn.pid ]] && kill -HUP "`cat gunicorn.pid`"; then
