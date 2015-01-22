@@ -13,6 +13,4 @@ from pelicanconf import *
 SITEURL = 'http://cmetcalfe.ca'
 RELATIVE_URLS = False
 
-SERVER_LESS = True
-
 DELETE_OUTPUT_DIRECTORY = True
