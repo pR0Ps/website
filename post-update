@@ -82,7 +82,7 @@ run_gunicorn(){
 generate_site(){
 
     # Setup the virtualenv
-    setup_venv pelican `which python3`
+    setup_venv pelican `which python`
 
     # Use client-side LESS if there's no compiler installed
     if ! which lessc &>/dev/null; then
@@ -117,7 +117,7 @@ generate_configs(){
 echo "Running post-update script"
 
 echo "Checking dependencies"
-dependencies=( "python3" "pip" "virtualenv" )
+dependencies=( "python2" "python3" "pip" "virtualenv" )
 for command in ${dependencies[@]}; do
     if ! which $command &>/dev/null; then
         echo "Missing dependency '$command', exiting"
@@ -131,7 +131,7 @@ git submodule update --init --recursive --force
 
 # Run/restart webapps
 run_gunicorn $OUT_DIR/mag2tor `which python3`
-run_gunicorn $OUT_DIR/gh-i2p `which python3`
+run_gunicorn $OUT_DIR/gh-i2p `which python2`
 
 # Generate the site
 generate_site

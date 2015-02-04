@@ -11,6 +11,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 SITEURL = 'http://cmetcalfe.ca'
+FEED_DOMAIN = SITEURL
 RELATIVE_URLS = False
 
 DELETE_OUTPUT_DIRECTORY = True

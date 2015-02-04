@@ -43,7 +43,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     git checkout -f
 
     echo "Calling the website's update script"
-    ./post-update
+    LANG="en_US.UTF-8" ./post-update
     ```
 
 5. Locally add the remote repository to the git remotes with

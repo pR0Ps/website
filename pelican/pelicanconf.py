@@ -11,8 +11,8 @@ TIMEZONE = 'America/Toronto'
 DEFAULT_LANG = u'en'
 DEFAULT_DATE_FORMAT = "%b %d, %Y"
 
-FEED_ALL_ATOM = None
-FEED_ALL_RSS = "feeds/rss.xml"
+FEED_ALL_ATOM = None #"feeds/all.atom"
+FEED_ALL_RSS = "feeds/all.rss"
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
