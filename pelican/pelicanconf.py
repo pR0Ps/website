@@ -64,7 +64,7 @@ SOCIAL = (
     #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
     ("Résumé (PDF)", "/files/cv.pdf"),
-    ("Donate (BTC)", "bitcoin:1EuToNinKcR8mF2sTcgM9LLLN7aVi4zDSs"),
+    ("Donate (BTC)", "bitcoin:15jv7w1AdCMkNpDaAQrPtwK3Lfxx5ggAKX"),
 )
 
 DEFAULT_PAGINATION = 3
