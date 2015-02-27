@@ -9,7 +9,7 @@
 	url = https://github.com/pR0Ps/gh-i2p.git
 [submodule "pelican/plugins/md_metayaml"]
 	path = pelican/plugins/md_metayaml
-	url = https://github.com/pR0Ps/pelican-md-metayaml.git
+	url = https://github.com/joachimneu/pelican-md-metayaml.git
 [submodule "pelican/plugins/sitemap"]
 	path = pelican/plugins/sitemap
 	url = https://github.com/pR0Ps/pelican-sitemap.git
