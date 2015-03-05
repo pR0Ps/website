@@ -63,6 +63,9 @@ SOCIAL = (
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
     #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
+)
+
+LINKS = (
     ("Résumé (PDF)", "/files/cv.pdf"),
     ("Donate (BTC)", "bitcoin:15jv7w1AdCMkNpDaAQrPtwK3Lfxx5ggAKX"),
 )
