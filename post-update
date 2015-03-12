@@ -84,16 +84,6 @@ generate_site(){
     # Setup the virtualenv
     setup_venv pelican `which python`
 
-    # Use client-side LESS if there's no compiler installed
-    if ! which lessc &>/dev/null; then
-        echo "WARNING: Server-side LESS is disabled"
-        echo "SERVER_LESS = False" >> publishconf.py
-    else
-        echo "SERVER_LESS = True" >> publishconf.py
-        echo "Compiling the LESS file"
-        lessc theme/static/css/style.less theme/static/css/style.css
-    fi
-
     echo "Generating the site"
     pelican -s publishconf.py -o $ROOT/$OUT_DIR/www content
 

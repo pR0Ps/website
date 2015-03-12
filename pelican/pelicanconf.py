@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- #
 
 from __future__ import unicode_literals
+import os
 
 AUTHOR = 'Carey Metcalfe'
 SITENAME = 'Carey Metcalfe'
@@ -16,13 +17,19 @@ FEED_ALL_RSS = "feeds/all.rss"
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
-PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["sitemap", "md_metayaml"]
+THEME = "theme"
+
+PLUGIN_PATHS = ["plugins", os.path.join(THEME, "plugins")]
+PLUGINS = ["sitemap", "md_metayaml", "assets"]
 MD_EXTENSIONS=['codehilite(css_class=highlight, guess_lang=False, linenums=True)', 'extra', 'admonition']
 LOAD_CONTENT_CACHE = False
 SLUGIFY_SOURCE = 'basename'
 
-THEME = "theme"
+STATIC_PATHS = ['images', "files"]
+EXTRA_PATH_METADATA = {
+    'files/favicon.ico': {'path': 'favicon.ico'},
+    'files/robots.txt': {'path': 'robots.txt'},
+}
 
 #Theme specific
 GOOGLE_ANALYTICS_ID = "UA-28306875-1"
@@ -35,11 +42,8 @@ FUZZY_DATES = True
 DISQUS_SITENAME = "cmetcalfe"
 DISQUS_COLLAPSED = True
 
-STATIC_PATHS = ['images', "files"]
-EXTRA_PATH_METADATA = {
-    'files/favicon.ico': {'path': 'favicon.ico'},
-    'files/robots.txt': {'path': 'robots.txt'},
-}
+# Webassets plugin
+ASSET_CONFIG = (("url_expire", False),)
 
 # Sitemap plugin
 SITEMAP = {
