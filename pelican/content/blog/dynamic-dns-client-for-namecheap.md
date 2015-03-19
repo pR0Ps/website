@@ -37,7 +37,7 @@ if [ $? -eq 0 ] && [ "$dns" != "$curr" ]; then
 fi
 ```
 
-It basically checks if the IP requrned by a DNS query for the subdomain matches
+It basically checks if the IP returned by a DNS query for the subdomain matches
 the current IP of the server (as reported by [curlmyip][]) and if it doesn't,
 sends a request to update the DNS. The `systemd-cat` commands are there just to
 put some record of the IP changing into the syslog. Maybe I'll do some analysis
