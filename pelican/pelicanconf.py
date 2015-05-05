@@ -44,6 +44,7 @@ DISQUS_COLLAPSED = True
 
 # Webassets plugin
 ASSET_CONFIG = (("url_expire", False),)
+ASSET_DEBUG = False
 
 # Sitemap plugin
 SITEMAP = {
