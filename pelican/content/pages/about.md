@@ -6,7 +6,7 @@ save_as: index.html
 
 Hi, I'm Carey.
 
-I'm a software developer currently working at [Avaya Inc.] in Ottawa.
+I'm a software developer currently working in Ottawa.
 
 When I'm not at work, I work on hobby projects, read, or spend time outdoors, usually on a bike.
 
@@ -17,7 +17,6 @@ Occasionally, I feel the need to document my experiences. If you're interested i
 
 If you want to get in touch with me for any reason, feel free to use any of the links in the sidebar.
 
-  [Avaya Inc.]: http://www.avaya.com/ca-en/
   [GitHub page]: https://github.com/pR0Ps
   [Blog]: /blog
   [resume]: {filename}/files/cv.pdf
