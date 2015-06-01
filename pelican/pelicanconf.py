@@ -35,7 +35,7 @@ EXTRA_PATH_METADATA = {
 GOOGLE_ANALYTICS_ID = "UA-28306875-1"
 GOOGLE_ANALYTICS_PROP = "cmetcalfe.ca"
 TAGLINE = "Software Developer"
-USER_LOGO_URL = "https://s.gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d?s=150" # Gravatar
+USER_LOGO_URL = "//gravatar.com/avatar/0b81e10e795095db6e3cb9b68a6d031d.jpg?s=150" # Gravatar
 MANGLE_EMAILS = True
 GLOBAL_KEYWORDS = ("cmetcalfe", "carey", "metcalfe", "pr0ps", "pr0pscm", "blog")
 FUZZY_DATES = True
