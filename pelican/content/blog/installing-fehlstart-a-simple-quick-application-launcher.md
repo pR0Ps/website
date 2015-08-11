@@ -20,7 +20,7 @@ source.
     - `git`, `gcc`, `make`, `libgtk2.0-dev`, `libkeybinder-dev`
     - On most systems these packages will be available through your package manager
 2. Get the code
-    - `git clone git://gitorious.org/fehlstart/fehlstart.git`
+    - `git clone https://gitlab.com/fehlstart/fehlstart.git`
 3. Compile and install
     - Navigate into the folder containing the code
     - Run `make`
@@ -32,7 +32,7 @@ source.
 7. Type to search through the installed applications, then press
    `<Enter>` to launch.
 
-  [Fehlstart]: https://gitorious.org/fehlstart
+  [Fehlstart]: https://gitlab.com/fehlstart/fehlstart
   [Launchy]: http://www.launchy.net/
   [Quicksilver]: http://qsapp.com/
   [GNOME Do]: http://do.cooperteam.net/
