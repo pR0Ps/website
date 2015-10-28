@@ -1,6 +1,10 @@
-*.pyc
-*/venv
+.DS_Store
+
+*.py[cod]
+venv?
+
 pelican/output
 pelican/cache
+
 out/_conf
 out/www
