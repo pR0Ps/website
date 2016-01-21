@@ -13,28 +13,19 @@ setup_venv(){
 
     if [[ ! -d $ROOT/"$1" ]]; then
         echo "No folder to setup virtualenv in found"
-        # Signal an error occured
-        return 2
+        return 1
     fi
     cd $ROOT/"$1"
 
     if [[ ! -d venv ]]; then
-        # Application virtualenv not configured, configure it
         echo "Virtualenv not found, setting one up"
 
         if ! virtualenv venv -p "$2"; then
             echo "Setting up virtualenv failed"
-            # Signal an error occured
-            return 2
+            return 1
         fi
-
-        # Signal that the venv was created
-        ret=1
     else
         echo "Found virtualenv, activating it"
-
-        # Signal that the venv was found
-        ret=0
     fi
 
     source venv/bin/activate
@@ -43,22 +34,22 @@ setup_venv(){
         pip install --upgrade -r requirements.txt
     fi
 
-    return $ret
+    return 0
 }
 
 run_gunicorn(){
 
     # Choose python version (default to system default)
     if [ "$#" -gt 1 ]; then
-        pypath="$2"
+        pyversion="$2"
     else
-        pypath=`which python`
+        pyversion=python
     fi
 
-    setup_venv "$1" "$pypath"
+    setup_venv "$1" "$pyversion"
     status=$?
 
-    if [[ $status -eq 2 ]]; then
+    if [[ $status -ne 0 ]]; then
         # Failed to create the virtualenv, can't continue
         echo "Couldn't find or create the virtualenv, not starting the application"
         return
@@ -75,19 +66,16 @@ run_gunicorn(){
         gunicorn app:app -b "unix:///tmp/"`basename "$1"`".socket" -w 1 -D -p gunicorn.pid
     fi
 
-    # Leave the vitualenv
     deactivate
 }
 
 generate_site(){
 
-    # Setup the virtualenv
-    setup_venv pelican `which python`
+    setup_venv pelican python2
 
     echo "Generating the site"
     pelican -s publishconf.py -o $ROOT/$OUT_DIR/www content
 
-    # Leave the vitualenv
     deactivate
 }
 
@@ -107,9 +95,9 @@ generate_configs(){
 echo "Running post-update script"
 
 echo "Checking dependencies"
-dependencies=( "python2" "python3" "pip" "virtualenv" )
+dependencies=( "python2" "python3" "virtualenv" )
 for command in ${dependencies[@]}; do
-    if ! which $command &>/dev/null; then
+    if ! command -v $command &>/dev/null; then
         echo "Missing dependency '$command', exiting"
         exit 1
     fi
@@ -120,8 +108,8 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart webapps
-run_gunicorn $OUT_DIR/mag2tor `which python3`
-run_gunicorn $OUT_DIR/gh-i2p `which python2`
+run_gunicorn $OUT_DIR/mag2tor python3
+run_gunicorn $OUT_DIR/gh-i2p python2
 
 # Generate the site
 generate_site
