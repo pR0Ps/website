@@ -37,10 +37,17 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     ln -s [path to site]/post-receive [path to site]/.git/hooks/post-receive
     ```
 
-5. Locally add the remote repository to your local git remotes with
+5. Set up a cronjob to automatically renew Let's Encrypt certificates on the 1st of every month 
+
+    ```
+    crontab -e
+    0 0 1 * * ROOT=[path to site] [path to site]/scripts/renew
+    ```
+
+6. Locally add the remote repository to your local git remotes with
 
     ```
     git remote add deploy ssh://[user]@[server]:[port]/[path to site]
     ```
 
-6. To update the website, commit changes then run `git push deploy`
+7. To update the website, commit changes then run `git push deploy`
