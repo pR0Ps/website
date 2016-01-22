@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CONFIG_INPUT="$ROOT/web_config"
+OUTPUT="$ROOT/out"
+CONFIG="$OUTPUT/_config"
+HTTPS_CONFIG="$CONFIG/https"

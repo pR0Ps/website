@@ -11,7 +11,7 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 1. Initialize a git repo on the server with
 
     ```
-    cd [path to website]
+    cd [path to site]
     git init
     git config --bool receive.denyCurrentBranch false
     git config --path core.worktree ../
@@ -20,36 +20,27 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
 2. Setup an Nginx site configuration file that includes all configuration files in the repositories `out/_config/nginx` directory. Ex:
 
     ```
-    include [path to website]/out/_config/nginx/*.conf;
+    include [path to site]/out/_config/nginx/*.conf;
     ```
 
-3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver (and any other commands in `post-update` that need root)
+3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver without a password
 
     ```
     [user] ALL=(root) NOPASSWD: /etc/init.d/nginx restart
     ```
 
-4. Add the Git post-receive hook (in `.git/hooks/post-receive`) to update the data and call the `post-update` script
+4. Link the Git post-receive hook (in `.git/hooks/post-receive`) to the `post-receive` script in the repo
 
     ```
-    #!/bin/sh
-
-    unset GIT_DIR
-
-    echo "Moving to output directory"
-    cd `git config --get core.worktree` || exit
-
-    echo "Checking out the repo"
-    git checkout -f
-
-    echo "Calling the website's update script"
-    LANG="en_US.UTF-8" ./post-update
+    # Make something to link to intially - will be replaced on first push
+    touch [path to site]/post-receive
+    ln -s [path to site]/post-receive [path to site]/.git/hooks/post-receive
     ```
 
-5. Locally add the remote repository to the git remotes with
+5. Locally add the remote repository to your local git remotes with
 
     ```
-    git remote add deploy ssh://[user]@[server]:[port]/[path to website]
+    git remote add deploy ssh://[user]@[server]:[port]/[path to site]
     ```
 
 6. To update the website, commit changes then run `git push deploy`

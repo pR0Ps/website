@@ -1,21 +1,19 @@
 #!/bin/bash
 
 # This script is called after the website is updated
-# Constants and functions are defined at the top, the script is at the bottom
 
-ROOT="`pwd`"
-OUT_DIR="out"
+source "$ROOT/scripts/constants"
 
 setup_venv(){
 
     # Set up the virtualenv for the python app
-    echo "Checking virtualenv for '"$1"'"
+    echo "Checking virtualenv for '$1'"
 
-    if [[ ! -d $ROOT/"$1" ]]; then
+    if [[ ! -d "$1" ]]; then
         echo "No folder to setup virtualenv in found"
         return 1
     fi
-    cd $ROOT/"$1"
+    cd "$1"
 
     if [[ ! -d venv ]]; then
         echo "Virtualenv not found, setting one up"
@@ -74,58 +72,32 @@ generate_site(){
     # Generate the config files
     generate_configs
 
-    setup_venv pelican python2
+    setup_venv "$ROOT/pelican" python2
 
     echo "Generating the site"
-    pelican -s publishconf.py -o $ROOT/$OUT_DIR/www content
+    pelican -s publishconf.py -o $OUTPUT/www content
 
     deactivate
 
-    # Call Let's Encrypt to make/renew HTTPS
-    cd "$ROOT/$OUT_DIR/_config/https"
-    if [[ ! -f "le_privkey.pem" ]]; then
-        echo "No Let's Encrypt private key found in the {{https}} directory"
-        exit 1
-    fi
-
-    # Fix up first-run issues (remove SSL config options)
-    if [[ ! -f "certs/cmetcalfe.ca/fullchain.pem" ]] || [[ ! -f "certs/cmetcalfe.ca/privkey.pem" ]]; then
-        echo "No certs found, temporarily disabling HTTPS"
-        mv "https.conf" "https.conf_"
-        touch "https.conf"
-    fi
-    if [[ ! -f "dhparam.pem" ]]; then
-        echo "No dhparam.pem found, generating one"
-        openssl dhparam -out dhparam.pem 2048
-    fi
-    mkdir -p ".acme-challenges"
-
-    # Make sure we're running the current configuration
-    sudo /etc/init.d/nginx restart
-    "$ROOT"/letsencrypt.sh/letsencrypt.sh --cron --config "$ROOT/$OUT_DIR/_config/https/le_config.sh"
-
-    if [[ -f "https.conf_" ]]; then
-        echo "Generated certs, re-enabling HTTPS"
-        mv "https.conf_" "https.conf"
-    fi
-
+    # Call the certificate renewal script
+    "$ROOT/scripts/renew"
 }
 
 generate_configs(){
     # Copy configs into expected locations while replacing paths in them
     # Replace {{root}}, {{output}}, and {{https}} in config files as they're copied
-    cd "$ROOT/web_config"
+    cd "$CONFIG_INPUT"
     for f in `find * -mindepth 1 -type f`; do
-        mkdir -p "$ROOT/$OUT_DIR/_config/"`dirname "$f"`
+        mkdir -p "$CONFIG/"`dirname "$f"`
         sed -e "s|{{root}}|$ROOT|g" \
-            -e "s|{{output}}|$ROOT/$OUT_DIR|g" \
-            -e "s|{{https}}|$ROOT/$OUT_DIR/_config/https|g" \
-            "$f" > "$ROOT/$OUT_DIR/_config/$f"
+            -e "s|{{output}}|$OUTPUT|g" \
+            -e "s|{{https}}|$HTTPS_CONFIG|g" \
+            "$f" > "$CONFIG/$f"
 
     done
 }
 
-echo "Running post-update script"
+echo "Running update script"
 
 echo "Checking dependencies"
 dependencies=( "python2" "python3" "virtualenv" )
@@ -141,12 +113,8 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart webapps
-run_gunicorn $OUT_DIR/mag2tor python3
-run_gunicorn $OUT_DIR/gh-i2p python2
+run_gunicorn $OUTPUT/mag2tor python3
+run_gunicorn $OUTPUT/gh-i2p python2
 
 # Generate the site
 generate_site
-
-# Restart the webserver to apply changes
-echo "Restarting the webserver"
-sudo /etc/init.d/nginx restart

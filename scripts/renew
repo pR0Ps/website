@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Requests/renews the Let's Encrypt certificate
+
+source "$ROOT/scripts/constants"
+
+cd "$HTTPS_CONFIG"
+
+# Forgot to add the private key
+if [[ ! -f "le_privkey.pem" ]]; then
+    echo "No Let's Encrypt private key found in the {{https}} directory"
+    echo "Add the private key to generate certificates and enable HTTPS"
+    exit 1
+fi
+
+# Fix up first-run issues (remove SSL config options)
+if [[ ! -f "certs/cmetcalfe.ca/fullchain.pem" ]] || [[ ! -f "certs/cmetcalfe.ca/privkey.pem" ]]; then
+    echo "No certs found, temporarily disabling HTTPS to run the server"
+    mv "https.conf" "https.conf_"
+    touch "https.conf"
+fi
+
+if [[ ! -f "dhparam.pem" ]]; then
+    echo "No dhparam.pem found, generating one"
+    openssl dhparam -out dhparam.pem 2048
+fi
+
+mkdir -p ".acme-challenges"
+
+# Make sure we're running the current configuration
+sudo /etc/init.d/nginx restart
+
+# Call Let's Encrypt to make/renew HTTPS
+"$ROOT"/letsencrypt.sh/letsencrypt.sh --cron --config "$HTTPS_CONFIG/le_config.sh"
+
+if [[ -f "https.conf_" ]]; then
+    echo "Generated certs, re-enabling HTTPS"
+    mv "https.conf_" "https.conf"
+fi
+
+# Restart the webserver to apply changes
+echo "Restarting the webserver"
+sudo /etc/init.d/nginx restart
