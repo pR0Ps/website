@@ -1,7 +1,7 @@
 Personal Website
 ================
 
-This is the contents of my personal website, found at http://cmetcalfe.ca
+This is the contents of my personal website, found at https://cmetcalfe.ca
 
 
 Updating
@@ -17,10 +17,10 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     git config --path core.worktree ../
     ```
 
-2. Setup an Nginx site configuration file that includes all configuration files in the repositories `out/_conf` directory. Ex:
+2. Setup an Nginx site configuration file that includes all configuration files in the repositories `out/_config/nginx` directory. Ex:
 
     ```
-    include [path to website]/out/_conf/*.conf;
+    include [path to website]/out/_config/nginx/*.conf;
     ```
 
 3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver (and any other commands in `post-update` that need root)

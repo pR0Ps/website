@@ -71,24 +71,57 @@ run_gunicorn(){
 
 generate_site(){
 
+    # Generate the config files
+    generate_configs
+
     setup_venv pelican python2
 
     echo "Generating the site"
     pelican -s publishconf.py -o $ROOT/$OUT_DIR/www content
 
     deactivate
+
+    # Call Let's Encrypt to make/renew HTTPS
+    cd "$ROOT/$OUT_DIR/_config/https"
+    if [[ ! -f "le_privkey.pem" ]]; then
+        echo "No Let's Encrypt private key found in the {{https}} directory"
+        exit 1
+    fi
+
+    # Fix up first-run issues (remove SSL config options)
+    if [[ ! -f "certs/cmetcalfe.ca/fullchain.pem" ]] || [[ ! -f "certs/cmetcalfe.ca/privkey.pem" ]]; then
+        echo "No certs found, temporarily disabling HTTPS"
+        mv "https.conf" "https.conf_"
+        touch "https.conf"
+    fi
+    if [[ ! -f "dhparam.pem" ]]; then
+        echo "No dhparam.pem found, generating one"
+        openssl dhparam -out dhparam.pem 2048
+    fi
+    mkdir -p ".acme-challenges"
+
+    # Make sure we're running the current configuration
+    sudo /etc/init.d/nginx restart
+    "$ROOT"/letsencrypt.sh/letsencrypt.sh --cron --config "$ROOT/$OUT_DIR/_config/https/le_config.sh"
+
+    if [[ -f "https.conf_" ]]; then
+        echo "Generated certs, re-enabling HTTPS"
+        mv "https.conf_" "https.conf"
+    fi
+
 }
 
 generate_configs(){
-    # Make the directory for the config files (and delete old ones)
-    mkdir -p $ROOT/$OUT_DIR/_conf
-    rm $ROOT/$OUT_DIR/_conf/*
-
-    # Replace {{root}} and {{output}} in config files as they're copied
-    for f in $ROOT/web_config/*.conf; do
+    # Copy configs into expected locations while replacing paths in them
+    # Replace {{root}}, {{output}}, and {{https}} in config files as they're copied
+    cd "$ROOT/web_config"
+    for f in `find * -mindepth 1 -type f`; do
+        mkdir -p "$ROOT/$OUT_DIR/_config/"`dirname "$f"`
         sed -e "s|{{root}}|$ROOT|g" \
             -e "s|{{output}}|$ROOT/$OUT_DIR|g" \
-            "$f" > $ROOT/$OUT_DIR/_conf/`basename "$f"`
+            -e "s|{{https}}|$ROOT/$OUT_DIR/_config/https|g" \
+            "$f" > "$ROOT/$OUT_DIR/_config/$f"
+
     done
 }
 
@@ -113,9 +146,6 @@ run_gunicorn $OUT_DIR/gh-i2p python2
 
 # Generate the site
 generate_site
-
-# Generate the Nginx config files
-generate_configs
 
 # Restart the webserver to apply changes
 echo "Restarting the webserver"
