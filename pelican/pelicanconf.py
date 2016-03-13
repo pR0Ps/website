@@ -20,8 +20,12 @@ TRANSLATION_FEED_ATOM = None
 THEME = "theme"
 
 PLUGIN_PATHS = ["plugins", os.path.join(THEME, "plugins")]
-PLUGINS = ["sitemap", "md_metayaml", "assets"]
-MD_EXTENSIONS=['codehilite(css_class=highlight, guess_lang=False, linenums=True)', 'extra', 'admonition']
+PLUGINS = ["sitemap", "pelican-yaml-metadata", "assets"]
+MD_EXTENSIONS = {
+    'markdown.extensions.codehilite': {"css_class": "highlight", "guess_lang": False, "linenums": True},
+    'markdown.extensions.extra': {},
+    'markdown.extensions.admonition': {},
+}
 LOAD_CONTENT_CACHE = False
 SLUGIFY_SOURCE = 'basename'
 
