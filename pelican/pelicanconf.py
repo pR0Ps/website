@@ -62,7 +62,8 @@ SITEMAP = {
         'articles': 'monthly',
         'indexes': 'daily',
         'pages': 'monthly'
-    }
+    },
+    'exclude': []
 }
 
 SOCIAL = (
