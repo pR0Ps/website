@@ -26,9 +26,9 @@ script.
 ```bash
 #!/bin/sh
 
-dns=`dig <subdomain>.cmetcalfe.ca +short`
+dns=`dig <subdomain>.cmetcalfe.ca @resolver1.opendns.com +short`
 curr=`dig myip.opendns.com @resolver1.opendns.com +short`
-if [ $? -eq 0 ] && [ "$dns" != "$curr" ]; then
+if [ $? -eq 0 ] && [ "$curr" != "" ] && [ "$dns" != "$curr" ]; then
     curl -s "https://dynamicdns.park-your-domain.com/update?host=<subdomain>&domain=cmetcalfe.ca&password=<my passkey>" | grep -q "<ErrCount>0</ErrCount>"
     if [ $? -eq 0 ]; then
         systemd-cat -t "`basename $0`" /usr/bin/echo "Server DNS record updated ($dns -> $curr)"
