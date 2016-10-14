@@ -10,9 +10,9 @@
 [submodule "pelican/plugins/sitemap"]
 	path = pelican/plugins/sitemap
 	url = https://github.com/pR0Ps/pelican-sitemap.git
-[submodule "letsencrypt.sh"]
-	path = letsencrypt.sh
-	url = https://github.com/lukas2511/letsencrypt.sh.git
 [submodule "pelican/plugins/pelican-yaml-metadata"]
 	path = pelican/plugins/pelican-yaml-metadata
 	url = https://github.com/pR0Ps/pelican-yaml-metadata.git
+[submodule "dehydrated"]
+	path = dehydrated
+	url = https://github.com/lukas2511/dehydrated.git
