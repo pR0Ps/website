@@ -4,33 +4,45 @@
 
 source "$ROOT/scripts/constants"
 
+# First run setup
 cd "$HTTPS_CONFIG"
-
-# Fix up first-run issues (remove SSL config options)
-if [[ ! -f "certs/cmetcalfe.ca/fullchain.pem" ]] || [[ ! -f "certs/cmetcalfe.ca/privkey.pem" ]]; then
-    echo "No certs found, temporarily disabling HTTPS to run the server"
-    mv "https.conf" "https.conf_"
-    touch "https.conf"
-fi
-
+mkdir -p ".wellknown"
 if [[ ! -f "dhparam.pem" ]]; then
     echo "No dhparam.pem found, generating one"
     openssl dhparam -out dhparam.pem 2048
 fi
 
-mkdir -p ".wellknown"
+function restart_nginx {
+    # Restart nginc and return the status
+    sudo /etc/init.d/nginx restart
+    sudo /etc/init.d/nginx status >/dev/null
+    return $?
+}
 
-# Make sure we're running the current configuration
-sudo /etc/init.d/nginx restart
+# Enable https, try running nginx, fall back to http
+cd "$CONFIG"/nginx
+ln -sfn "https" "include"
+if ! restart_nginx; then
+    echo "Failed to run in HTTPS mode, falling back to HTTP..."
+    ln -sfn "http" "include"
+    if ! restart_nginx; then
+        echo "Something is wrong with the nginx config - fix it and run again"
+        exit 1
+    fi
+fi
 
 # Call Let's Encrypt to make/renew HTTPS
 "$ROOT/dehydrated/dehydrated" --cron --config "$HTTPS_CONFIG/config"
-
-if [[ -f "https.conf_" ]]; then
-    echo "Generated certs, re-enabling HTTPS"
-    mv "https.conf_" "https.conf"
+if [ $? -ne 0 ]; then
+    echo "WARNING: Unable to renew certs, falling back to HTTP"
+    ln -sfn "http" "include"
+else
+    echo "Cert renewal complete, enabling HTTPS"
+    ln -sfn "https" "include"
 fi
 
-# Restart the webserver to apply changes
-echo "Restarting the webserver"
-sudo /etc/init.d/nginx restart
+# Restart nginx
+if ! restart_nginx; then
+    echo "Failed to restart nginx, check the error log"
+    exit 1
+fi
