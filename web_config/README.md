@@ -8,6 +8,7 @@ The `post-update` script will perform the following replacements:
 - `{{root}}` will be replaced with the root directory of the repository.
 - `{{output}}` will be replaced with the root output directory of the website.
 - `{{https}}` will be replaced with the https config directory of the website.
+- `{{nginx}}` will be replaced with the nginx config directory of the website.
 
 The `http` and `https` folders in the `nginx` directory store different versions of config files.
 If HTTPS is enabled, nginx will attempt to use the config files in the `https` folder, otherwise the

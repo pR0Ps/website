@@ -92,6 +92,7 @@ generate_configs(){
         sed -e "s|{{root}}|$ROOT|g" \
             -e "s|{{output}}|$OUTPUT|g" \
             -e "s|{{https}}|$HTTPS_CONFIG|g" \
+            -e "s|{{nginx}}|$NGINX_CONFIG|g" \
             "$f" > "$CONFIG/$f"
 
     done

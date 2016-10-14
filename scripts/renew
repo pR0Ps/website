@@ -20,7 +20,7 @@ function restart_nginx {
 }
 
 # Enable https, try running nginx, fall back to http
-cd "$CONFIG"/nginx
+cd "$NGINX_CONFIG"
 ln -sfn "https" "include"
 if ! restart_nginx; then
     echo "Failed to run in HTTPS mode, falling back to HTTP..."
