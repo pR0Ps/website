@@ -14,7 +14,7 @@ Github currently doesn't provide a way to convert an issue to a pull request
 in their interface. However, the capability exists in their [Pull Request API][].
 
 !!! update
-    I've built a webapp to make this easier. Check it out at [http://i2p.cmetcalfe.ca](http://i2p.cmetcalfe.ca).
+    I've built a webapp to make this easier. Check it out at [https://i2p.cmetcalfe.ca](https://i2p.cmetcalfe.ca).
 
 To call the API using a simple `curl` command, run the command:
 
