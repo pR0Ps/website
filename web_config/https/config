@@ -1,0 +1,9 @@
+BASEDIR="{{https}}"
+
+CHALLENGETYPE="http-01"
+WELLKNOWN="${BASEDIR}/.wellknown"
+RENEW_DAYS=35
+
+# Testing
+#CA="https://acme-staging.api.letsencrypt.org/directory"
+#RENEW_DAYS=99

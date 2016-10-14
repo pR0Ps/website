@@ -23,10 +23,11 @@ Note that this setup uses [Nginx](http://nginx.org/) on [Debian](http://www.debi
     include [path to site]/out/_config/nginx/*.conf;
     ```
 
-3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart the webserver without a password
+3. Modify `/etc/sudoers` (with `visudo`) to allow the user to restart and get the status of the webserver without a password
 
     ```
     [user] ALL=(root) NOPASSWD: /etc/init.d/nginx restart
+    [user] ALL=(root) NOPASSWD: /etc/init.d/nginx status
     ```
 
 4. Link the Git post-receive hook (in `.git/hooks/post-receive`) to the `post-receive` script in the repo
