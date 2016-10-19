@@ -39,21 +39,22 @@ Once you have shell access, follow the steps below. Note that bits of the comman
 
 5.  Filtering - Add the users to apply to rule to
     - By src IP (Ex: IP = `192.168.1.100`)
-    
+
             tc filter add dev br0 parent 1: protocol ip prio 16 u32 match ip src 192.168.1.100 flowid 1:1
 
     - By dst IP (Ex: IP = `192.168.1.100`)
-        
+
             tc filter add dev br0 parent 1: protocol ip prio 16 u32 match ip dst 192.168.1.100 flowid 1:1
 
     - By src MAC (Ex: MAC = `M0-M1-M2-M3-M4-M5`)
-        
+
             tc filter add dev br0 parent 1: protocol ip prio 5 u32 match u16 0x0800 0xFFFF at -2 match u16 0xM4M5 0xFFFF at -4 match u32 0xM0M1M2M3 0xFFFFFFFF at -8 flowid 1:1
-    
+
     - By dst MAC (Ex: MAC = `M0-M1-M2-M3-M4-M5`)
-        
+
             tc filter add dev br0 parent 1: protocol ip prio 5 u32 match u16 0x0800 0xFFFF at -2 match u32 0xM2M3M4M5 0xFFFFFFFF at -12 match u16 0xM0M1 0xFFFF at -14 flowid 1:1
 
-Disclaimer
-----------
-These settings worked for me, if there's a better way of doing this, let me know!
+Sources
+-------
+ - http://lartc.org/lartc.html
+ - http://www.docum.org/faq/cache/62.html

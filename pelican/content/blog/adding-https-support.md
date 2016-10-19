@@ -37,8 +37,8 @@ was to make two sets of configs. An HTTP set, and an HTTPS set. During the renew
 configs are tried, and if running Nginx fails, it falls back to the HTTP set. Switching between HTTP
 and HTTPS configs is done by modifying a symlink.
 
-When all set up, this makes both generating a cert for the first time and renewing a cert is as easy
-as deploying the site. For continual, automated renewals, a monthly `cron` job was added. With the
+When all set up, this makes both generating a cert for the first time and renewing a cert as easy as
+deploying the site. For continual, automated renewals, a monthly `cron` job was added. With the
 expiry of certs being 90 days, this should be frequent enough that the certs should never expire.
 
  [SSL Server Test]: https://www.ssllabs.com/ssltest/index.html
