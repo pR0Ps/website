@@ -73,6 +73,7 @@ SOCIAL = (
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
     #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
     ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
+    ("Keybase", "https://keybase.io/carey")
 )
 
 LINKS = (
