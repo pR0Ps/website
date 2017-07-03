@@ -1,9 +1,6 @@
 [submodule "pelican/theme"]
 	path = pelican/theme
 	url = https://github.com/pR0Ps/pelican-subtle.git
-[submodule "out/mag2tor"]
-	path = out/mag2tor
-	url = https://github.com/pR0Ps/mag2tor.git
 [submodule "out/gh-i2p"]
 	path = out/gh-i2p
 	url = https://github.com/pR0Ps/gh-i2p.git

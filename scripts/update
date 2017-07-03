@@ -114,7 +114,6 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart webapps
-run_gunicorn $OUTPUT/mag2tor python3
 run_gunicorn $OUTPUT/gh-i2p python2
 
 # Generate the site
