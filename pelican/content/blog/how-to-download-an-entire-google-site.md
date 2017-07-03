@@ -22,7 +22,7 @@ Once wget is installed, run it with the following parameters:
 ```bash
 #Downloads all public pages on a Google Site
 
-wget -e robots=off -m -k -K -E -rH -Dsites.google.com --no-check-certificate http://sites.google.com/a/domain/site/
+wget -e robots=off -m -k -K -E -rH -Dsites.google.com http://sites.google.com/a/domain/site/
 ```
 
 This tells wget to spider through all the links on your site and download

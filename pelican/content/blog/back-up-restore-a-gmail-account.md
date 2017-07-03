@@ -1,5 +1,5 @@
 ---
-Title: Backup/Restore a GMail account
+Title: Backup/Restore a Gmail account
 Date: 2012-02-11 22:08
 Modified: 2014-12-17 16:44
 Author: Carey Metcalfe

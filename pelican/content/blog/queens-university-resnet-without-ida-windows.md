@@ -23,14 +23,14 @@ step back and let Windows Update do it's job), and a few other things.
 After all that, you enter your NetID and password, and it registers you.
 In theory.
 
-What I ran into every single time I ran it with my laptop (running
-Windows XP at the time) was it was it failing to download something,
-throwing an error message and refusing to register me. I gave up after a
-few times and plugged in my other computer (Running the relatively
-obscure Windows XP x64). What I noticed is that I didn't get the typical
-quarantine page, I got a simple page that asked for a NetID and
-password. I entered my information and got a message stating I was good
-to go. I checked a few pages and they all seemed to work.
+What I ran into every single time I ran it with my laptop (running Windows
+XP at the time) was it failing to download something, throwing an error
+message and refusing to register me. I gave up after a few times and
+plugged in my other computer (Running the relatively obscure Windows XP
+x64). What I noticed is that I didn't get the typical quarantine page, I
+got a simple page that asked for a NetID and password. I entered my
+information and got a message stating I was good to go. I checked a few
+pages and they all seemed to work.
 
 I plugged my laptop back in and tried to load a page. The same
 quarantine screen. Since the main way a webpage tells the difference
