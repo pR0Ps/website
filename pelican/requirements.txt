@@ -1,6 +1,6 @@
-pelican==3.6.3
-Markdown==2.6.5
-PyYAML==3.11
+Markdown==2.6.8
+pelican==3.7.1
+PyYAML==3.12
 
 # Requirements for the theme
 -r theme/requirements.txt

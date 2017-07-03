@@ -21,10 +21,13 @@ THEME = "theme"
 
 PLUGIN_PATHS = ["plugins", os.path.join(THEME, "plugins")]
 PLUGINS = ["sitemap", "pelican-yaml-metadata", "assets"]
-MD_EXTENSIONS = {
-    'markdown.extensions.codehilite': {"css_class": "highlight", "guess_lang": False, "linenums": True},
-    'markdown.extensions.extra': {},
-    'markdown.extensions.admonition': {},
+MARKDOWN = {
+    'extension_configs':{
+        'markdown.extensions.codehilite': {"css_class": "highlight", "guess_lang": False, "linenums": True},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.admonition': {},
+    },
+    'output_format': 'html5',
 }
 LOAD_CONTENT_CACHE = False
 SLUGIFY_SOURCE = 'basename'
