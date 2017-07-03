@@ -18,7 +18,7 @@ setup_venv(){
     if [[ ! -d venv ]]; then
         echo "Virtualenv not found, setting one up"
 
-        if ! virtualenv venv -p "$2"; then
+        if ! "$2" -m venv venv; then
             echo "Setting up virtualenv failed"
             return 1
         fi
@@ -72,7 +72,7 @@ generate_site(){
     # Generate the config files
     generate_configs
 
-    setup_venv "$ROOT/pelican" python2
+    setup_venv "$ROOT/pelican" python3.6
 
     echo "Generating the site"
     pelican -s publishconf.py -o "$OUTPUT/www" content
@@ -101,7 +101,7 @@ generate_configs(){
 echo "Running update script"
 
 echo "Checking dependencies"
-dependencies=( "python2" "python3" "virtualenv" )
+dependencies=( "python3.6" )
 for command in ${dependencies[@]}; do
     if ! command -v "$command" &>/dev/null; then
         echo "Missing dependency '$command', exiting"
@@ -114,7 +114,7 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart webapps
-run_gunicorn "$OUTPUT/gh-i2p" python2
+run_gunicorn "$OUTPUT/gh-i2p" python3.6
 
 # Generate the site
 generate_site
