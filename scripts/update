@@ -13,7 +13,7 @@ setup_venv(){
         echo "No folder to setup virtualenv in found"
         return 1
     fi
-    cd "$1"
+    cd "$1" || return
 
     if [[ ! -d venv ]]; then
         echo "Virtualenv not found, setting one up"
@@ -57,11 +57,11 @@ run_gunicorn(){
     pip install --upgrade gunicorn
 
     # (Re)start gunicorn
-    if [[ -f gunicorn.pid ]] && kill -HUP "`cat gunicorn.pid`"; then
+    if [[ -f gunicorn.pid ]] && kill -HUP "$(cat gunicorn.pid)"; then
         echo "Restarted gunicorn"
     else
         echo "Starting gunicorn"
-        gunicorn app:app -b "unix:///tmp/"`basename "$1"`".socket" -w 1 -D -p gunicorn.pid
+        gunicorn app:app -b "unix:///tmp/"$(basename "$1")".socket" -w 1 -D -p gunicorn.pid
     fi
 
     deactivate
@@ -75,7 +75,7 @@ generate_site(){
     setup_venv "$ROOT/pelican" python2
 
     echo "Generating the site"
-    pelican -s publishconf.py -o $OUTPUT/www content
+    pelican -s publishconf.py -o "$OUTPUT/www" content
 
     deactivate
 
@@ -86,9 +86,9 @@ generate_site(){
 generate_configs(){
     # Copy configs into expected locations while replacing paths in them
     # Replace {{root}}, {{output}}, and {{https}} in config files as they're copied
-    cd "$CONFIG_INPUT"
-    for f in `find * -mindepth 1 -type f`; do
-        mkdir -p "$CONFIG/"`dirname "$f"`
+    cd "$CONFIG_INPUT" || return
+    for f in $(find ./* -mindepth 1 -type f); do
+        mkdir -p "$CONFIG/$(dirname "$f")"
         sed -e "s|{{root}}|$ROOT|g" \
             -e "s|{{output}}|$OUTPUT|g" \
             -e "s|{{https}}|$HTTPS_CONFIG|g" \
@@ -103,7 +103,7 @@ echo "Running update script"
 echo "Checking dependencies"
 dependencies=( "python2" "python3" "virtualenv" )
 for command in ${dependencies[@]}; do
-    if ! command -v $command &>/dev/null; then
+    if ! command -v "$command" &>/dev/null; then
         echo "Missing dependency '$command', exiting"
         exit 1
     fi
@@ -114,7 +114,7 @@ echo "Updating submodules"
 git submodule update --init --recursive --force
 
 # Run/restart webapps
-run_gunicorn $OUTPUT/gh-i2p python2
+run_gunicorn "$OUTPUT/gh-i2p" python2
 
 # Generate the site
 generate_site

@@ -3,10 +3,10 @@
 unset GIT_DIR
 
 echo "Moving to output directory"
-cd `git config --get core.worktree` || exit
+cd "$(git config --get core.worktree)" || exit
 
 echo "Checking out the repo"
 git checkout -f
 
 echo "Calling the update script"
-LANG="en_US.UTF-8" ROOT=`pwd` ./scripts/update
+LANG="en_US.UTF-8" ROOT=$(pwd) ./scripts/update

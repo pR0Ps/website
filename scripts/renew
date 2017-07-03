@@ -5,7 +5,7 @@
 source "$ROOT/scripts/constants"
 
 # First run setup
-cd "$HTTPS_CONFIG"
+cd "$HTTPS_CONFIG" || exit 1
 mkdir -p ".wellknown"
 if [[ ! -f "dhparam.pem" ]]; then
     echo "No dhparam.pem found, generating one"
@@ -20,7 +20,7 @@ function restart_nginx {
 }
 
 # Enable https, try running nginx, fall back to http
-cd "$NGINX_CONFIG"
+cd "$NGINX_CONFIG" || exit 1
 ln -sfn "https" "include"
 if ! restart_nginx; then
     echo "Failed to run in HTTPS mode, falling back to HTTP..."
