@@ -33,23 +33,25 @@ The checkout autocomplete behaviour is defined in a function called
 function with our own version that has different autocomplete logic in it.
 
 The location of the file varies over different operating systems and
-configurations, but on most distros it's `/etc/bash_completion.d/git`.
+configurations, but here are a few spots to look:
+ - `/etc/bash_completion.d/git`
+ - `/usr/share/bash-completion/completions/git`
 
 For a brew-installed git autocomplete on OSX, the file will probably be
-`$(brew --prefix)/etc/bash_completion.d/git`
+`$(brew --prefix)/etc/bash_completion.d/git-completion.bash`
 
 Once you've found the file, copy the entire `_git_checkout` function into your
 `.bashrc` (or equivalent non-login shell startup script). Now look for the line
 
-`__gitcomp_nl "$(__git_refs '' $track)"`
+`__git_complete_refs $track_opt`
 
 We're just going to change this line to:
 
 ```bash
 if [ "$command" = "checkoutr" ]; then
-    __gitcomp_nl "$(__git_refs '' $track)"
+    __git_complete_refs $track_opt
 else
-	__gitcomp_nl "$(__git_heads '' $track)"
+    __gitcomp_nl "$(__git_heads '' $track)"
 fi
 ```
 
@@ -58,3 +60,5 @@ branches when using `git checkout`, but will go back to the default behaviour
 of autocompleting all references when using `git checkoutr`.
 
 Credits to a combination of answers on [this](https://stackoverflow.com/questions/6623649/disable-auto-completion-of-remote-branches-in-git-bash) StackOverflow post.
+
+EDIT 2017-10-02: Updated for the current version of git thanks to [Alexander Ko's comment](https://gist.github.com/mmrko/b3ec6da9bea172cdb6bd83bdf95ee817#gistcomment-2218059).
