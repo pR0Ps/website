@@ -32,7 +32,7 @@ if ! restart_nginx; then
 fi
 
 # Call Let's Encrypt to make/renew HTTPS
-"$ROOT/dehydrated/dehydrated" --cron --config "$HTTPS_CONFIG/config"
+"$ROOT/dehydrated/dehydrated" --accept-terms --cron --config "$HTTPS_CONFIG/config"
 if [ $? -ne 0 ]; then
     echo "WARNING: Unable to renew certs, falling back to HTTP"
     ln -sfn "http" "include"
