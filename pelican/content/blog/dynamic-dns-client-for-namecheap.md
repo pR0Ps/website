@@ -26,38 +26,54 @@ script.
 ```bash
 #!/bin/sh
 
-dns=`dig <subdomain>.cmetcalfe.ca @resolver1.opendns.com +short`
-curr=`dig myip.opendns.com @resolver1.opendns.com +short`
-if [ $? -eq 0 ] && [ "$curr" != "" ] && [ "$dns" != "$curr" ]; then
-    curl -s "https://dynamicdns.park-your-domain.com/update?host=<subdomain>&domain=cmetcalfe.ca&password=<my passkey>" | grep -q "<ErrCount>0</ErrCount>"
-    if [ $? -eq 0 ]; then
-        systemd-cat -t "`basename $0`" /usr/bin/echo "Server DNS record updated ($dns -> $curr)"
+# Abort if anything goes wrong (negates the need for error-checking)
+set -e
+
+# Uses drill instead of dig
+resolve() {
+    #dig "$1" @resolver1.opendns.com +short 2> /dev/null
+    line=$(drill "$1" @resolver1.opendns.com 2> /dev/null | sed '/;;.*$/d;/^\s*$/d' | grep "$1")
+    echo "$line" | head -1 | cut -f5
+}
+
+dns=$(resolve <subdomain>.cmetcalfe.ca)
+curr=$(resolve myip.opendns.com)
+if [ "$dns" != "$curr" ]; then
+    if curl -s "https://dynamicdns.park-your-domain.com/update?host=<subdomain>&domain=cmetcalfe.ca&password=<my passkey>" | grep -q "<ErrCount>0</ErrCount>"; then
+        echo "Server DNS record updated ($dns -> $curr)"
     else
-        systemd-cat -t "`basename $0`" /usr/bin/echo "Server DNS record update FAILED (tried $dns -> $curr)"
+        echo "Server DNS record update FAILED (tried $dns -> $curr)"
     fi
 fi
 ```
 
 It basically checks if the IP returned by a DNS query for the subdomain matches
 the current IP of the server (as reported by an [OpenDNS][] resolver) and if it
-doesn't, sends a request to update the DNS. The `systemd-cat` commands are there
-just to put some record of the IP changing into the syslog. Maybe I'll do some
-analysis of it at some point.
+doesn't, sends a request to update the DNS. The `echo` commands are there just
+to output some record of the IP changing. Maybe I'll do some analysis of it at
+some point.
 
-From here, it's as easy as using [cron][] to run this script every 30 minutes
-(`/30 * * * * /usr/local/bin/dns-update`) and I can be confident that my
-subdomain will always be pointing at my home server when I need access to it.
+To run the script every 30 minutes and redirect any output from it to the
+syslog, the following [crontab][] entry can be used:
+```bash
+*/30 * * * * /path/to/dns-update | /usr/bin/logger -t dns-update
+```
+
+With the script automatically running every 30 minutes I can now be confident
+that my subdomain will always be pointing at my home server whenever I need
+access to it.
+
 
 !!! note
     A previous version of this article used `curl -sf http://curlmyip.com` to
     find the server's current IP address. However, after curlmyip went down for
     a few days, I decided to take the advice in [this StackExchange answer][]
-    and use OpenDNS instead.
+    and use [OpenDNS][] instead.
 
   [Namecheap]: http://namecheap.com
   [recommended DDNS client]: https://www.namecheap.com/support/knowledgebase/article.aspx/28
   [enabling DDNS for the domain]: https://www.namecheap.com/support/knowledgebase/article.aspx/595
   [Namecheap's article on using the browser to update DDNS]: https://www.namecheap.com/support/knowledgebase/article.aspx/29
   [OpenDNS]: https://en.wikipedia.org/wiki/OpenDNS
-  [cron]: http://en.wikipedia.org/wiki/Cron
+  [crontab]: http://en.wikipedia.org/wiki/Cron
   [this StackExchange answer]: http://unix.stackexchange.com/a/81699

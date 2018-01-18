@@ -113,7 +113,7 @@ data. Putting it all together we get:
 ```bash
 curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
 jq '
-[.observations[] | {(.d) : .FXUSDCAD.v}] | add | del(.[] | nulls) |
+    [.observations[] | {(.d) : .FXUSDCAD.v}] | add | del(.[] | nulls) |
     {
         "average": (add / length),
         "values": .
