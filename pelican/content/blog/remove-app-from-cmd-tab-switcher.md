@@ -1,10 +1,10 @@
 ---
-title: Remove an application from the cmd-tab switcher on OSX
+title: Remove an application from the cmd-tab switcher on macOS
 date: 2015-01-22 23:30
 author: Carey Metcalfe
 tags:
   - application
-  - mac osx
+  - macOS
 ---
 
 At work, I use [iTerm2][] as my main terminal emulator. For quick access, I have
