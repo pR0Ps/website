@@ -1,4 +1,4 @@
-Markdown==2.6.8
+Markdown==2.6.11
 pelican==3.7.1
 PyYAML==3.12
 
