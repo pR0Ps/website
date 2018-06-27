@@ -1,6 +1,7 @@
 ---
 Title: Bank of Canada currency conversion rates in the terminal
 Date: 2017-07-02 21:43
+Modified: 2018-06-28 8:30
 Author: Carey Metcalfe
 Tags:
   - website
@@ -9,10 +10,10 @@ Tags:
 
 Preface
 =======
-In this entry I'll use two command line tools ([`curl`][curl] and [`jq`][jq]) to request currency conversion rates
-from the [Bank of Canada]. Now obviously getting the same data through the [normal web interface] is
-possible as well. However, doing it this way returns the data in a machine-readable form, allowing
-it to be customized or used as input into other programs.
+In this entry I'll use two command line tools ([`curl`][curl] and [`jq`][jq]) to request currency
+conversion rates from the [Bank of Canada]. Now obviously getting the same data through the [normal
+web interface] is possible as well. However, doing it this way returns the data in a
+machine-readable form, allowing it to be customized or used as input into other programs.
 
 The basic flow will be request the data using `curl`, then pipe it to `jq` for processing.
 
@@ -24,12 +25,16 @@ The basic flow will be request the data using `curl`, then pipe it to `jq` for p
 We'll go from seeing the raw data the server returns to something that we can more easily use. **To
 skip to the final result, click [here](#tldr)**.
 
+!!! Update
+    The URLs for the data were originally reverse-engineered from the website. They have since been
+    turned into a supported API. See [the API documentation] for more details.
+
 Lets go!
 ========
 
 Hitting the server without any processing will give the following result:
 ```bash
-curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10"
+curl -s "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10"
 ```
 ```json
 {
@@ -57,7 +62,7 @@ single-element dictionaries, we'll also need to "add" (merge) them together.
 
 To do this with `jq`, it looks like this:
 ```bash
-curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
+curl -s "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
 jq '
     [.observations[] | {(.d) : .FXUSDCAD.v}] | add
 '
@@ -77,7 +82,7 @@ jq '
 That first `null` entry where there was no data is going to cause problems later, so let's just
 delete it using the `del` function:
 ```bash
-curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
+curl -s "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
 jq '
     [.observations[] | {(.d) : .FXUSDCAD.v}] | add | del(.[] | nulls)
 '
@@ -98,7 +103,7 @@ statistics from this data. For example, we want to know the average exchange rat
 range. Now that we have the data in an easy to use format, computing an average with `jq` is just a
 matter of passing the values to an `add / length` filter. For example:
 ```bash
-curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
+curl -s "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
 jq '
     [.observations[] | {(.d) : .FXUSDCAD.v}] | add | del(.[] | nulls) | add / length
 '
@@ -111,7 +116,7 @@ jq '
 data. Putting it all together we get:
 
 ```bash
-curl -s "http://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
+curl -s "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?start_date=2017-01-01&end_date=2017-01-10" |\
 jq '
     [.observations[] | {(.d) : .FXUSDCAD.v}] | add | del(.[] | nulls) |
     {
@@ -151,7 +156,7 @@ Appendix<a name="appendix"></a>
 A list of codes can be easily scraped from the lookup page. The command and its result are below for
 reference.
 ```bash
-curl -s "http://www.bankofcanada.ca/rates/exchange/daily-exchange-rates-lookup/" | grep -Eo '"FX......".*<'
+curl -s "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates-lookup/" | grep -Eo '"FX......".*<'
 ```
 ```
 "FXAUDCAD">Australian dollar<
@@ -184,5 +189,6 @@ curl -s "http://www.bankofcanada.ca/rates/exchange/daily-exchange-rates-lookup/"
 
  [curl]: https://curl.haxx.se/
  [jq]: https://stedolan.github.io/jq/
- [Bank of Canada]: http://www.bankofcanada.ca
- [normal web interface]: http://www.bankofcanada.ca/rates/exchange/daily-exchange-rates-lookup/
+ [Bank of Canada]: https://www.bankofcanada.ca
+ [normal web interface]: https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates-lookup/
+ [the API documentation]: https://www.bankofcanada.ca/valet/docs
