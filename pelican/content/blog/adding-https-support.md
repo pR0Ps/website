@@ -5,6 +5,7 @@ Author: Carey Metcalfe
 Tags:
   - website
   - security
+  - let's encrypt
 ---
 
 Yesterday I finally ticked something off my todo list that'd been on there for a while - I added
@@ -51,4 +52,4 @@ expiry of certs being 90 days, this should be frequent enough that the certs sho
  [dehydrated]: https://github.com/lukas2511/dehydrated
  [official Let's Encrypt client]: https://github.com/letsencrypt/letsencrypt
  [ACME protocol]: https://github.com/letsencrypt/acme-spec
- [location rule in the Nginx config]: https://github.com/pR0Ps/website/blob/master/web_config/https/letsencrypt.conf
+ [location rule in the Nginx config]: https://github.com/pR0Ps/website/blob/8b3f9509e5f97522ac01789ca562409a7475cc60/web_config/https/letsencrypt.conf
