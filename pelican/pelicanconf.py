@@ -72,16 +72,12 @@ SITEMAP = {
 SOCIAL = (
     ("Email", "mailto:carey@cmetcalfe.ca"),
     ("GitHub", "https://github.com/pR0Ps"),
-    ("Google+", "https://plus.google.com/+CareyMetcalfe"),
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
-    #("Stackoverflow", "https://stackoverflow.com/users/369977/pr0ps"),
-    ("LinkedIn", "https://linkedin.com/pub/carey-metcalfe/21/b6b/bba"),
     ("Keybase", "https://keybase.io/carey")
 )
 
 LINKS = (
-    ("Résumé (PDF)", "/files/cv.pdf"),
-    ("Donate (BTC)", "bitcoin:15jv7w1AdCMkNpDaAQrPtwK3Lfxx5ggAKX"),
+    #("Donate (BTC)", "bitcoin:15jv7w1AdCMkNpDaAQrPtwK3Lfxx5ggAKX"),
 )
 
 DEFAULT_PAGINATION = 3
