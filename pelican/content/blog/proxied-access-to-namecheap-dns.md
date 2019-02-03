@@ -1,6 +1,7 @@
 ---
 Title: Proxied access to the Namecheap DNS API
 Date: 2019-01-20 06:15
+Modified: 2019-02-03 13:42
 Author: Carey Metcalfe
 Tags:
   - code
@@ -119,7 +120,7 @@ Fun fact: The previous `http-01` version of this script was a mess - it involved
 configurations with symlinks, manually opening up the `.well-known/acme-challenge` endpoint, and
 some other terrible hacks. This version is *much* nicer.
 
-```
+```bash
 #!/bin/sh
 # Generate/renew Let's Encrypt certificates using dehydrated and lexicon
 
@@ -172,7 +173,17 @@ xxxxxxxx A    www.cmetcalfe.ca xxx.xxx.xxx.xxx 1800
 An updated version of my [previous script][old dns-update] that uses the API instead of the
 [DynamicDNS service Namecheap provides][Namecheap dyndns]. Called via `cron` every 30 minutes.
 
-```
+!!! Update
+    A previous version of this script didn't try to delete the DNS entry before setting the new one,
+    resulting in multiple IPs being set as the same `A` record.
+
+    This is because the [update function of the Namecheap plugin for lexicon] is implemented as a
+    2-step delete and add. When it tries to delete the old record, it looks for one with the same
+    content as the old one. This means that if you update a record with a new IP, it doesn't find
+    the old record to delete first, leaving you with all of your old IPs set as individual A
+    records.
+
+```bash
 #!/bin/sh
 # Check the server's current IP against the IP listed in its DNS entry.
 # Set the current IP if they differ.
@@ -189,6 +200,10 @@ curr=$(resolve myip.opendns.com)
 if [ "$dns" != "$curr" ]; then
     source ~/.config/lexicon.rc
     source ~/.config/tempproxy.rc
+    if ! lexicon "$PROVIDER" delete cmetcalfe.ca A --name "<subdomain>.cmetcalfe.ca"; then
+        echo "Failed to delete old DNS record, not setting the new one."
+        exit 1
+    fi
     if lexicon "$PROVIDER" update cmetcalfe.ca A --name "<subdomain>.cmetcalfe.ca" --content "$curr" --ttl=900; then
         echo "Server DNS record updated ($dns -> $curr)"
     else
@@ -211,4 +226,5 @@ fi
 [requests proxy support]: http://docs.python-requests.org/en/master/user/advanced/#proxies
 [requests]: http://python-requests.org
 [ssh-limited-port-forward]: https://askubuntu.com/questions/48129/how-to-create-a-restricted-ssh-user-for-port-forwarding/50000#50000
+[update function of the Namecheap plugin for lexicon]: https://github.com/AnalogJ/lexicon/blob/1feca5ead36cbf85ad92676dc853045e2c646097/lexicon/providers/namecheap.py#L233
 [wildcard certificates became available]: https://community.letsencrypt.org/t/acme-v2-and-wildcard-certificate-support-is-live/55579
