@@ -67,4 +67,4 @@ EDIT 2018-03-24: Updated to [speed up branch and tag completion][].
   [disable-auto-completion-of-remote-branches-in-git-bash]: https://stackoverflow.com/questions/6623649/disable-auto-completion-of-remote-branches-in-git-bash
   [git v2.13.0]: https://github.com/git/git/commit/15b4a163950c2e8660a7797ce3975ccea8705f80#diff-f37c4f4a898819f0ca4b5ff69e81d4d9
   [Alexander Ko's comment]: https://gist.github.com/mmrko/b3ec6da9bea172cdb6bd83bdf95ee817#gistcomment-2218059
-  [speed up branch and tag completion]: https://github.com/git/git/commit/227307a639c96b3579b7fe60840fdae123d1ee88)
+  [speed up branch and tag completion]: https://github.com/git/git/commit/227307a639c96b3579b7fe60840fdae123d1ee88

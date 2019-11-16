@@ -240,7 +240,7 @@ d99a9d63b1cd9e4b3f823d4d03144ccd95328f48  pixel_alt9.png
 ```
 
 `pixel_alt1.png` looks like a good candidate, let's see what changed:
-```
+```bash
 $ diff <(./pngview.py pixel.png) <(./pngview.py pixel_alt1.png)
 20,21c20,21
 <             data = b'\x08\x1dc`\x00\x00\x00\x02\x00\x01' (total 10)

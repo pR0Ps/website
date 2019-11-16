@@ -28,7 +28,7 @@ Pelican is a Python-based static site generator that uses the awesome [Jinja2][]
 and understands content written in a number of formats, including Markdown.
 It's extremely easy to set up and requires only a single command to regenerate the entire site.
 
-Transferring content from the old blog into the *.md files that Pelican reads was also really simple.
+Transferring content from the old blog into the \*.md files that Pelican reads was also really simple.
 Pelican includes a tool called `pelican-import` that allows for reading in data from a variety of sources.
 I used this tool to pull all my previous posts down from the RSS feed of the old blog.
 
@@ -44,7 +44,7 @@ The code for the [template] and the [site] is all freely availible on GitHub.
 If you have any comments or suggestions I'd love to hear them!
 
   [Blogger]: http://blogger.com
-  [screenshot]: {filename}/images/old_website_screenshot.png
+  [screenshot]: {static}/images/old_website_screenshot.png
   [Markdown syntax]: http://daringfireball.net/projects/markdown
   [Pelican]: http://blog.getpelican.com
   [Jinja2]: http://jinja.pocoo.org/docs

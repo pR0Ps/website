@@ -85,7 +85,7 @@ million people][] using it at one point or another. I recognize that the change 
 changing a config file to enable functionality that already existed, but it's helped me get through
 some of the non-coding hurdles of contributing to an Android fork like CyanogenMod (adb, fastboot,
 unlocking and rooting phones, compiling AOSP, flashing images, the contribution process, etc). This
-time the actual contribution itself was minor, but it's gotten me mor familier with the process,
+time the actual contribution itself was minor, but it's gotten me more familier with the process,
 hopefully making it easier to contribute something more substantial in the future.
 
 In the end, I learned a lot about Android development and how all the different pieces that I had
@@ -110,5 +110,5 @@ hardware and software.
   [xpad kernel module]: https://www.kernel.org/doc/html/v4.16/input/devices/xpad.html
   [here]: https://wiki.lineageos.org/submitting-patch-howto.html
   [irc]: https://webchat.freenode.net/?channels=#cyanogenmod-dev
-  [changelog screenshot]: {filename}/images/cyanogenmod-changelog-xbox-support.png
+  [changelog screenshot]: {static}/images/cyanogenmod-changelog-xbox-support.png
   [at least a million people]: https://twitter.com/CyanogenMod/status/157378138802888704
