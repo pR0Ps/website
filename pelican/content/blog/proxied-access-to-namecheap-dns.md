@@ -1,7 +1,7 @@
 ---
 Title: Proxied access to the Namecheap DNS API
 Date: 2019-01-20 06:15
-Modified: 2019-02-03 13:42
+Modified: 2020-03-04 21:03
 Author: Carey Metcalfe
 Tags:
   - code
@@ -140,10 +140,15 @@ if ! dehydrated --accept-terms --cron --challenge dns-01 --hook dehydrated.defau
     exit 1
 fi
 
-# Restart nginx if it's currently running
-if systemctl is-active nginx.service >/dev/null && ! systemctl restart nginx.service; then
+# Reload the nginx config if it's currently running
+if ! systemctl is-active nginx.service > /dev/null; then
+    echo "nginx isn't running, not reloading it"
+    exit 0
+fi
+
+if ! systemctl reload nginx.service; then
     systemctl status nginx.service
-    echo "Failed to restart nginx, check the error log"
+    echo "Failed to reload nginx config, check the error log"
     exit 1
 fi
 ```
