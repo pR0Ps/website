@@ -73,7 +73,6 @@ SOCIAL = (
     ("Email", "mailto:carey@cmetcalfe.ca"),
     ("GitHub", "https://github.com/pR0Ps"),
     ("Twitter", "https://twitter.com/CareyMetcalfe"),
-    ("Keybase", "https://keybase.io/carey")
 )
 
 LINKS = (
