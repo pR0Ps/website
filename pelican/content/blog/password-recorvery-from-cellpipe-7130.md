@@ -99,7 +99,8 @@ printMenuItem('util_webfirmware.html', 'Web Firmware Upload', black,white);//Jam
 ```
 
 Visiting `http://<router_ip>/util_cfgstore.html` shows a nice "Store" button that downloads a text
-file containing 771(!) key/value pairs, including the username and password for the router. Success!
+file containing 771(!) key/value pairs, including the username and password for the PPPoE connection.
+Success!
 
 Future plans
 ------------
@@ -109,10 +110,10 @@ bridge mode. However, flipping those settings on and applying the new config usi
 with it while I look into sourcing a better modem to use my newfound credentials with.
 
 Longer-term, the plan is to transition to a dedicated modem that provides WAN access to a low-power
-computer running [pfSense][] for firewall and routing duties. From there, an unmanaged switch
-(possibly injecting [PoE][]) can provide access for enough dumb wireless APs to bathe the house in WiFi,
-as well as wired hookups for the devices that don't move around too much or need the throughput. For
-now though, I'll settle for replacing the modem.
+computer running [pfSense][] that handles firewall and routing duties. From there, an unmanaged
+switch (possibly injecting [PoE][]) can provide access for enough dumb wireless APs to bathe the
+house in WiFi, as well as wired hookups for the devices that don't move around too much or need the
+throughput. For now though, I'll settle for replacing the modem.
 
 [DHCP]: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 [PPPoE]: https://en.wikipedia.org/wiki/Point-to-Point_Protocol_over_Ethernet
