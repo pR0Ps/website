@@ -1,6 +1,8 @@
-Markdown==3.3.4
-pelican==4.6.0
-PyYAML==5.4.1
+Markdown>=3.3.4,<4.0.0
+pelican>=4.6.0,<5.0.0
+PyYAML>=5.4.1,<6.0.0
+pelican-sitemap>=1.0.2,<2.0.0
+git+https://github.com/pR0Ps/pelican-yaml-metadata.git
 
 # Requirements for the theme
 -r theme/requirements.txt

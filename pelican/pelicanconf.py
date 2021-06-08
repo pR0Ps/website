@@ -20,7 +20,7 @@ TRANSLATION_FEED_ATOM = None
 THEME = "theme"
 
 PLUGIN_PATHS = ["plugins", os.path.join(THEME, "plugins")]
-PLUGINS = ["sitemap", "pelican-yaml-metadata", "assets"]
+PLUGINS = ["sitemap", "yaml_metadata", "assets"]
 MARKDOWN = {
     'extension_configs':{
         'markdown.extensions.codehilite': {"css_class": "highlight", "guess_lang": False, "linenums": True},
