@@ -19,8 +19,8 @@ TRANSLATION_FEED_ATOM = None
 
 THEME = "theme"
 
-PLUGIN_PATHS = ["plugins", os.path.join(THEME, "plugins")]
-PLUGINS = ["sitemap", "yaml_metadata", "assets"]
+PLUGIN_PATHS = []
+PLUGINS = ["sitemap", "yaml_metadata", "webassets"]
 MARKDOWN = {
     'extension_configs':{
         'markdown.extensions.codehilite': {"css_class": "highlight", "guess_lang": False, "linenums": True},
@@ -39,19 +39,14 @@ EXTRA_PATH_METADATA = {
 }
 
 #Theme specific
-GOOGLE_ANALYTICS_ID = "UA-28306875-1"
-GOOGLE_ANALYTICS_PROP = "cmetcalfe.ca"
+GOOGLE_ANALYTICS_ID = "G-DXC76BHD2F"
 TAGLINE = "Software Developer"
 USER_LOGO_URL = "/images/avatar.jpg"
 MANGLE_EMAILS = True
 GLOBAL_KEYWORDS = ("cmetcalfe", "carey", "metcalfe", "pr0ps", "pr0pscm", "blog")
-FUZZY_DATES = True
+RELATIVE_DATES = True
 DISQUS_SITENAME = "cmetcalfe"
 DISQUS_COLLAPSED = True
-
-# Webassets plugin
-ASSET_CONFIG = (("url_expire", False),)
-ASSET_DEBUG = False
 
 # Sitemap plugin
 SITEMAP = {
