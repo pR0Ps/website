@@ -1,6 +1,7 @@
 ---
 Title: Removing the Proxmox VE subscription notice
 Date: 2021-04-28 10:03
+Modified: 2023-06-18
 Author: Carey Metcalfe
 Tags:
   - proxmox
@@ -142,6 +143,9 @@ WantedBy=pveproxy.service
 
 And that's it! The subscription notice should now be gone for good. I'll update this post if it
 breaks, but that hopefully won't be for a while.
+
+!!! UPDATE
+    This is still working as of Proxmox VE 7.4-13
 
 
   [^1]: Interestingly, the existing solutions I found all patch the code that checks the returned
