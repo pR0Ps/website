@@ -8,6 +8,7 @@ Tags:
  - code
  - linux
  - website
+ - homelab
 ---
 
 In addition to running this website, I also run a home server. For convenience,

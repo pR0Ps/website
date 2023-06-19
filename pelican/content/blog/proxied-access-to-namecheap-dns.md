@@ -9,6 +9,7 @@ Tags:
   - website
   - automation
   - let's encrypt
+  - homelab
 ---
 
 ## Background

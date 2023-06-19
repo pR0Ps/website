@@ -6,6 +6,7 @@ Tags:
   - proxmox
   - linux
   - shell script
+  - homelab
 ---
 
 [Proxmox VE][] is an open-source ([AGPL v3][]) virtualization platform for running containers and
