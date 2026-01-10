@@ -55,13 +55,13 @@ Given this, as long as we only use the function definition to do the patch, it s
 version of Proxmox VE to date (and hopefully into the future). Using `sed` to prepend `orig_cmd();
 return;` to the function should work nicely:
 ```bash
-sed --in-place 's/checked_command: function(orig_cmd) {$/& orig_cmd(); return;/' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+sed --in-place 's/checked_command: function (orig_cmd) {$/& orig_cmd(); return;/' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 ```
 
 This results in the following change:
 ```diff
--checked_command: function(orig_cmd) {
-+checked_command: function(orig_cmd) { orig_cmd(); return;
+-checked_command: function (orig_cmd) {
++checked_command: function (orig_cmd) { orig_cmd(); return;
 ```
 
 Notice that the `sed` script is looking for the function definition followed by a line ending (`$`).
@@ -72,7 +72,7 @@ automating it later.
 Now that we know it works, we should harden it up against whitespace changes by replacing the spaces
 in the regex with `\s*` (0 or more whitespace characters):
 ```bash
-sed --in-place 's/checked_command:\s*function(orig_cmd)\s*{\s*$/& orig_cmd(); return;/' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+sed --in-place 's/checked_command:\s*function\s*(orig_cmd)\s*{\s*$/& orig_cmd(); return;/' /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 ```
 
 The only thing left to solve is which file `checked_command` is defined in. Since it used to be a
@@ -83,8 +83,8 @@ future.
 To deal with this, we use `grep` to find the file that it's defined in, then run the previous
 command over that file:
 ```bash
-grep --files-with-matches --include '*.js' --recursive --null 'checked_command:\s*function(orig_cmd)' /usr/share/ \
-  | xargs --null --no-run-if-empty sed --in-place 's/checked_command:\s*function(orig_cmd)\s*{\s*$/& orig_cmd(); return;/'
+grep --files-with-matches --include '*.js' --recursive --null 'checked_command:\s*function\s*(orig_cmd)' /usr/share/ \
+  | xargs --null --no-run-if-empty sed --in-place 's/checked_command:\s*function\s*(orig_cmd)\s*{\s*$/& orig_cmd(); return;/'
 ```
 
 Simply run this command on your Proxmox VE server[^2], refresh the web UI, and the notice should be
@@ -134,7 +134,7 @@ Before=pveproxy.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "grep --files-with-matches --include '*.js' --recursive --null 'checked_command:\s*function(orig_cmd)' /usr/share/ | xargs --null --no-run-if-empty sed --in-place 's/checked_command:\s*function(orig_cmd)\s*{\s*$/& orig_cmd(); return;/'"
+ExecStart=/bin/sh -c "grep --files-with-matches --include '*.js' --recursive --null 'checked_command:\s*function\s*(orig_cmd)' /usr/share/ | xargs --null --no-run-if-empty sed --in-place 's/checked_command:\s*function\s*(orig_cmd)\s*{\s*$/& orig_cmd(); return;/'"
 
 [Install]
 WantedBy=pveproxy.service
@@ -145,7 +145,7 @@ And that's it! The subscription notice should now be gone for good. I'll update 
 breaks, but that hopefully won't be for a while.
 
 !!! UPDATE
-    This is still working as of Proxmox VE 7.4-13
+    Current version is known to be still working as of Proxmox VE 9.1.4
 
 
   [^1]: Interestingly, the existing solutions I found all patch the code that checks the returned
